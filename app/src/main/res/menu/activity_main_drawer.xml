@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_menufood"
+            android:icon="@drawable/ic_menu_menufood"
+            android:title="Меню" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_profile"
+            android:title="Личный кабинет" />
+        <item
+            android:id="@+id/nav_geolocation"
+            android:icon="@drawable/ic_menu_geolocation"
+            android:title="О ресторане" />
+        <item
+            android:id="@+id/nav_car"
+            android:icon="@drawable/ic_menu_car"
+            android:title="О доставке" />
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_menu_historyclock"
+            android:title="Новости"/>
+
+        <item
+            android:id="@+id/nav_mail"
+            android:icon="@drawable/ic_menu_mail"
+            android:title="Обратная связь"/>
+        <item
+            android:id="@+id/nav_app"
+            android:icon="@drawable/ic_menu_app"
+            android:title="О приложении"/>
+        <item
+            android:id="@+id/nav_recycler_buy"
+            android:icon="@drawable/ic_menu_app"
+            android:title="Корзина"/>
+
+    </group>
+
+
+</menu>
