@@ -133,18 +133,12 @@ public class MainActivity extends AppCompatActivity
     {
         View btn_view = findViewById(R.id.button_close_dish_layout);
         ImageView img_view = findViewById(R.id.image_dish_layout);
-        factory.set_image(img_view, dish.image + "big");
         TextView txt_view = findViewById(R.id.text_dish_layout);
-        //img_view.setMaxHeight(200);
-        //img_view.setVisibility(View.INVISIBLE);
-        Point point = new Point();
-        getWindowManager().getDefaultDisplay().getSize(point);
+
+        factory.set_image(img_view, dish.image + "big");
         txt_view.setText(dish.text);
         btn_view.setOnClickListener(this);
         changeView(R.id.dish_layout);
-        int y = (int)(point.y*0.6);
-        img_view.setMaxHeight(y);
-        img_view.requestLayout();
     }
 
 
@@ -295,7 +289,12 @@ public class MainActivity extends AppCompatActivity
 //            menu_recycler_view.setAdapter(adapter);
 //            current_adapter = 0;
 //        }
-        if (active_view.getId() == R.id.menu) return;
+        if (active_view.getId() == R.id.menu && current_adapter == 1)
+        {
+            menu_recycler_view.setAdapter(adapter);
+            current_adapter = 0;
+            changeView(R.id.menu);
+        }
         changeView(incative_view.getId());
 
     }
