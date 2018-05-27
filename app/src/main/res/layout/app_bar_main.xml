@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bigchirfufa.MainActivity"
+    android:id="@+id/container">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#d4141b"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/bigchief_logo"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/summaKorzina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="3dp"
+                android:text="0"
+                android:textColor="@android:color/white" />
+
+            <ImageView
+                android:id="@+id/korzina"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="right"
+                android:layout_margin="3dp"
+                android:src="@drawable/bacsket"
+                android:textColor="@android:color/white" />
+
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include android:id="@+id/content"
+        layout="@layout/content_main"
+        android:visibility="invisible"
+        />
+    <include android:id="@+id/dish_layout"
+        layout="@layout/dish_layout"
+        android:visibility="invisible"
+        />
+
+    <include
+        android:id="@+id/menu"
+        layout="@layout/menulayout"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/navstar"
+        layout="@layout/nav_star"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/car"
+        layout="@layout/car"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/profile"
+        layout="@layout/profile"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/meat"
+        layout="@layout/menu_meat"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/recycler_buy"
+        layout="@layout/layout_recycler_buy"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/recycler_is_empty"
+        layout="@layout/layout_recycler_is_empty"
+        android:visibility="invisible"/>
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--app:srcCompat="@android:drawable/ic_dialog_email"-->
+        <!--android:visibility="invisible"/>-->
+
+</android.support.design.widget.CoordinatorLayout>
