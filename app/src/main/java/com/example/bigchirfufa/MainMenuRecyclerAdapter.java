@@ -11,9 +11,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by Kostya on 19.04.2018.
- */
 
 public class MainMenuRecyclerAdapter extends RecyclerView.Adapter<MainMenuRecyclerAdapter.ViewHolder> {
 
@@ -69,7 +66,6 @@ public class MainMenuRecyclerAdapter extends RecyclerView.Adapter<MainMenuRecycl
         }
     }
 
-    // convenience method for getting data at click position
     MenuItem getItem(int id) {
         return mData.get(id);
     }
@@ -79,7 +75,6 @@ public class MainMenuRecyclerAdapter extends RecyclerView.Adapter<MainMenuRecycl
         this.mClickListener = itemClickListener;
     }
 
-    // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }

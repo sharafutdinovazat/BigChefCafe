@@ -141,6 +141,19 @@ public class MainActivity extends AppCompatActivity
         changeView(R.id.dish_layout);
     }
 
+    public void stopAnimation(Boolean stop)
+    {
+        View view = (View) findViewById(R.id.wait_anim_layout);
+        if (view == null)
+        {
+            throw new NullPointerException("Animation view is null!");
+        }
+        if (stop)
+            view.setVisibility(View.GONE);
+        else
+            view.setVisibility(View.VISIBLE);
+    }
+
 
     @Override
     public void onClick(View view)
@@ -233,7 +246,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-
+        stopAnimation(true);
         if (id == R.id.nav_mail) {
 /////////////////////////////////////////////////////////////////////
         } else if (id == R.id.nav_profile)
@@ -284,16 +297,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void openQuitDialog() {
-//        if (current_adapter == 1 || current_adapter == 2)
-//        {
-//            menu_recycler_view.setAdapter(adapter);
-//            current_adapter = 0;
-//        }
+        if (active_view.getId() == R.id.recycler_is_empty)
+        {
+            changeView(R.id.menu);
+            return;
+        }
         if (active_view.getId() == R.id.menu && current_adapter == 1)
         {
             menu_recycler_view.setAdapter(adapter);
             current_adapter = 0;
             changeView(R.id.menu);
+            stopAnimation(true);
         }
         changeView(incative_view.getId());
 
@@ -301,6 +315,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(View view, int position) {
+        if (menu_recycler_adapter.mDataset != null && !menu_recycler_adapter.mDataset.isEmpty())
+        {
+            stopAnimation(true);
+        }
+        else
+        {
+            stopAnimation(false);
+        }
         menu_recycler_view.getRecycledViewPool().clear();
         menu_recycler_adapter.update_menu(position);
         menu_recycler_view.setAdapter(menu_recycler_adapter);

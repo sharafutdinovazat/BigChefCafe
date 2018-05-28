@@ -19,10 +19,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapter.ViewHolder> {
 
-    private ArrayList<ArrayList<Dish>> mDataset;
+    public ArrayList<ArrayList<Dish>> mDataset;
 
     public ArrayList<Dish> mDataBuy;
 
@@ -148,8 +149,10 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     @Override
     public int getItemCount() {
         if (mDataset.size() > current_url) {
+            context.stopAnimation(true);
             return mDataset.get(current_url).size();
         } else {
+            context.stopAnimation(false);
             return 0;
         }
     }
@@ -163,44 +166,51 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
                 mDataset = new ArrayList<ArrayList<Dish>>();
             }
             ArrayList<ArrayList<Dish>> dishArrayList = new ArrayList<ArrayList<Dish>>();
-            try {
-                for (int i = 0; i < urls[0].size(); i++) {
-                    dishArrayList.add(new ArrayList<Dish>());
-                    String url = urls[0].get(i);
-                    Document doc = null;
-                    url = "http://bigchefufa.ru/menyu-dostavki/" + url + "/";
-                    doc = Jsoup.connect(url).timeout(10000).get();
-                    Elements metaElement = doc.select("html");
-                    Elements foods = doc.getElementsByClass("menusection-item");
+            while (true) {
+                try {
+                    for (int i = 0; i < urls[0].size(); i++) {
+                        dishArrayList.add(new ArrayList<Dish>());
+                        String url = urls[0].get(i);
+                        Document doc = null;
+                        url = "http://bigchefufa.ru/menyu-dostavki/" + url + "/";
+                        doc = Jsoup.connect(url).timeout(1000).get();
+                        Elements metaElement = doc.select("html");
+                        Elements foods = doc.getElementsByClass("menusection-item");
 
-                    for (Element food : foods)
+                        for (Element food : foods)
 
-                    {
-                        String title = Jsoup.parse(food.getElementsByClass("menusection-title").text()).text();
-                        String time = food.getElementsByClass("menusection-time").text();
-                        String price = food.getElementsByClass("menusection-price").text();
-                        String weight = food.getElementsByClass("menusection-weight").text();
-                        String image = food.getElementsByClass("menusection-link").attr("href");
-                        String text = Jsoup.parse(food.childNode(3).attr("data-title").toString()).text();
-                        factory.load_image(image);
-                        dishArrayList.get(i).add(new Dish(title, time, price, weight, image, text));
+                        {
+                            String title = Jsoup.parse(food.getElementsByClass("menusection-title").text()).text();
+                            String time = food.getElementsByClass("menusection-time").text();
+                            String price = food.getElementsByClass("menusection-price").text();
+                            String weight = food.getElementsByClass("menusection-weight").text();
+                            String image = food.getElementsByClass("menusection-link").attr("href");
+                            String text = Jsoup.parse(food.childNode(3).attr("data-title").toString()).text();
+                            factory.load_image(image);
+                            dishArrayList.get(i).add(new Dish(title, time, price, weight, image, text));
+                        }
+                        String name = metaElement.attr("name");
+                        Elements mainHeaderElements = doc.select("h2.main");
                     }
-                    String name = metaElement.attr("name");
-                    Elements mainHeaderElements = doc.select("h2.main");
-                }
-                timer.cancel();
-                return dishArrayList;
-            } catch (IOException e) {
 
-                e.printStackTrace();
-                return null;
+                    return dishArrayList;
+                } catch (IOException e) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e2) {}
+
+                }
+
             }
         }
 
         @Override
         protected void onPostExecute(ArrayList<ArrayList<Dish>> result) {
             super.onPostExecute(result);
-            if (result== null) timer.schedule(timer_task, 1000);
+            if (result == null)
+            {
+                return;
+            }
             mDataset = result;
             this_context.notifyDataSetChanged();
         }
