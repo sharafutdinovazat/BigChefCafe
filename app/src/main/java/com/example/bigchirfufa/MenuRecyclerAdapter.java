@@ -146,6 +146,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
+        if (mDataset == null) return 0;
         if (mDataset.size() > current_url) {
             context.stopAnimation(true);
             return mDataset.get(current_url).size();
