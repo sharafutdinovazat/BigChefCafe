@@ -29,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:text="Title"
                 android:textSize="14sp" />
 
@@ -37,24 +38,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="Time"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/weightRC"
+                android:id="@+id/weightRc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginRight="10dp"
                 android:gravity="right"
                 android:text="Weight"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:typeface="serif" />
 
             <TextView
                 android:id="@+id/priceRC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="10dp"
                 android:gravity="right"
                 android:text="Price"
                 android:textSize="14sp" />

@@ -22,10 +22,11 @@
             <ImageView
 
                 android:layout_width="55dp"
-                android:layout_height="match_parent"
+                android:layout_height="55dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/bigchief_logo"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/summaKorzina"
