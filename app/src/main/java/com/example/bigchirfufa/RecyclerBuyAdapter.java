@@ -105,6 +105,7 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
             {
                 String str = dish.first.price;
                 str = str.replaceAll("\\D+","");
+                if (str.isEmpty()) str = "0";
                 summa = summa + Integer.valueOf(str) * dish.second;
             }
         }
