@@ -154,7 +154,7 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
                     }
                     else
                     {
-                        if (dish.count == 0) {
+                        if (dish.count == 1) {
                             item_to_delete = j;
                             continue;
                         }
