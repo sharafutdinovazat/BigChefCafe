@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     RecyclerBuyAdapter  recycler_buy_adapter;
 
 
-    private static Context context;
+    private static MainActivity context;
     //current adapter
     // 0 - main menu
     // 1 - menu dishes
@@ -48,15 +48,15 @@ public class MainActivity extends AppCompatActivity
 
     User user;
 
-    public static Context getAppContext()
+    public static MainActivity getAppContext()
     {
-        return MainActivity.context;
+        return context;
     }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MainActivity.context = getApplicationContext();
+        MainActivity.context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -262,7 +262,6 @@ public class MainActivity extends AppCompatActivity
             buy_recycler_view.getRecycledViewPool().clear();
             if ((menu_recycler_adapter.mDataBuy == null) || (menu_recycler_adapter.mDataBuy.size() == 0))
             {
-
                 changeView(R.id.recycler_is_empty);
             }
             else {

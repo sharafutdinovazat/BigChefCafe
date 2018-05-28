@@ -49,7 +49,7 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
         holder.myTextViewTitle.setText(dish.first.title);
         holder.myTextViewCount.setText(dish.second.toString());
 
-        holder.dish = new Dish(holder.myTextViewTitle.getText().toString(), "", dish.first.price, "", "",  "");
+        holder.dish = dish.first;//new Dish(holder.myTextViewTitle.getText().toString(), "", dish.first.price, "", "",  "");
         holder.dish.count = dish.second;
         holder.myTextViewPrice.setText(dish.first.price + " x " + holder.dish.count);
         factory.set_image(holder.myImageView, dish.first.image);
@@ -167,6 +167,12 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
             if (item_to_delete != -1)
             {
                 mData.remove(item_to_delete);
+            }
+            if (mData.isEmpty())
+            {
+                update_dataset(new ArrayList<Dish>());
+                MainActivity.getAppContext().menu_recycler_adapter.mDataBuy.clear();
+                MainActivity.getAppContext().changeView(R.id.recycler_is_empty);
             }
             this_context.notifyDataSetChanged();
             summ_update();

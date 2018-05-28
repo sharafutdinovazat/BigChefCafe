@@ -171,7 +171,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
                         String url = urls[0].get(i);
                         Document doc = null;
                         url = "http://bigchefufa.ru/menyu-dostavki/" + url + "/";
-                        doc = Jsoup.connect(url).timeout(1000).get();
+                        doc = Jsoup.connect(url).timeout(5000).get();
                         Elements metaElement = doc.select("html");
                         Elements foods = doc.getElementsByClass("menusection-item");
 
@@ -192,7 +192,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
                     }
 
                     return dishArrayList;
-                } catch (IOException e) {
+                } catch (Exception e) {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e2) {}
