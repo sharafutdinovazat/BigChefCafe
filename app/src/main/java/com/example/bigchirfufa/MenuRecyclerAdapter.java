@@ -2,7 +2,6 @@ package com.example.bigchirfufa;
 
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapter.ViewHolder> {
 
@@ -56,12 +54,12 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
 
         public ViewHolder(View view) {
             super(view);
-            mTextViewTitle = (TextView) view.findViewById(R.id.titleRC);
-            mTextViewPrice = (TextView) view.findViewById(R.id.priceRC);
-            mTextViewWeight = (TextView) view.findViewById(R.id.weightRC);
-            mTextViewTime = (TextView) view.findViewById(R.id.timeRC);
-            mImageView = (ImageView) view.findViewById(R.id.imageRc);
-            mButtonAdd = (Button) view.findViewById(R.id.button_add_recycler);
+            mTextViewTitle = view.findViewById(R.id.titleRC);
+            mTextViewPrice = view.findViewById(R.id.priceRC);
+            mTextViewWeight = view.findViewById(R.id.weightRC);
+            mTextViewTime = view.findViewById(R.id.timeRC);
+            mImageView = view.findViewById(R.id.imageRc);
+            mButtonAdd = view.findViewById(R.id.button_add_recycler);
             //view.setOnClickListener(this);
             mImageView.setOnClickListener(this);
             mButtonAdd.setOnClickListener(this);
@@ -125,7 +123,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     public MenuRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         // create a new view
-        View lay = (View) LayoutInflater.from(parent.getContext())
+        View lay = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.dish_rec, parent, false);
 
         return new ViewHolder(lay);

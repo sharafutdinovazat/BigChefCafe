@@ -1,7 +1,5 @@
 package com.example.bigchirfufa;
 
-
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -13,11 +11,6 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by Kostya on 19.04.2018.
- */
 
 public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.ViewHolder> {
 
@@ -42,7 +35,7 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        View lay = (View) LayoutInflater.from(parent.getContext())
+        View lay = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_buy_item, parent, false);
 
         return new RecyclerBuyAdapter.ViewHolder(lay);
@@ -115,9 +108,9 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
                 summa = summa + Integer.valueOf(str) * dish.second;
             }
         }
-        TextView txt  = (TextView) view_root.findViewById(R.id.summa_price);
+        TextView txt  = view_root.findViewById(R.id.summa_price);
         txt.setText("Итого: " + String.valueOf(summa) + " руб.");
-        TextView summa_total = (TextView) view_root.getRootView().findViewById(R.id.summaKorzina);
+        TextView summa_total = view_root.getRootView().findViewById(R.id.summaKorzina);
         summa_total.setText(String.valueOf(summa) + '\u20BD');
     }
 

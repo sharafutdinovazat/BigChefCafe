@@ -1,10 +1,7 @@
 package com.example.bigchirfufa;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Point;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,19 +18,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import java.util.ArrayList;
-
-
-//                View view = findViewById(R.id.animView);
-//                        AnimationDrawable animation = (AnimationDrawable) view.getBackground();
-//                        animation.setOneShot(false);
-//                        animation.start();
-
 
 
 public class MainActivity extends AppCompatActivity
@@ -70,7 +59,7 @@ public class MainActivity extends AppCompatActivity
         MainActivity.context = getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
@@ -116,13 +105,13 @@ public class MainActivity extends AppCompatActivity
 
         findViewById(R.id.button_buy).setOnClickListener(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         findViewById(R.id.profile).setOnClickListener(this);
@@ -143,7 +132,7 @@ public class MainActivity extends AppCompatActivity
 
     public void stopAnimation(Boolean stop)
     {
-        View view = (View) findViewById(R.id.wait_anim_layout);
+        View view = findViewById(R.id.wait_anim_layout);
         if (view == null)
         {
             throw new NullPointerException("Animation view is null!");
@@ -164,7 +153,7 @@ public class MainActivity extends AppCompatActivity
             if (user.isEmpty())
             {
                 changeView(R.id.profile);
-                Toast.makeText(this, "Пожалуйста заполните профиль", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "Пожалуйста заполните профиль", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -199,7 +188,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -283,7 +272,7 @@ public class MainActivity extends AppCompatActivity
                 changeView(R.id.recycler_buy);
             }
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -302,13 +291,21 @@ public class MainActivity extends AppCompatActivity
             changeView(R.id.menu);
             return;
         }
-        if (active_view.getId() == R.id.menu && current_adapter == 1)
+        if (active_view.getId() == R.id.menu)
         {
-            menu_recycler_view.setAdapter(adapter);
-            current_adapter = 0;
-            changeView(R.id.menu);
+            if (current_adapter == 1)
+            {
+                menu_recycler_view.setAdapter(adapter);
+                current_adapter = 0;
+                changeView(R.id.menu);
+                stopAnimation(true);
+                return;
+            }
+            if (current_adapter == 0)
+                finish();
             stopAnimation(true);
         }
+
         changeView(incative_view.getId());
 
     }
@@ -352,11 +349,7 @@ class User
         {
             return true;
         }
-        if (adress.getText().toString().isEmpty())
-        {
-            return true;
-        }
-        return false;
+        return adress.getText().toString().isEmpty();
     }
 }
 

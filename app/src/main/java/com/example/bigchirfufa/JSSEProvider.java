@@ -16,8 +16,8 @@ package com.example.bigchirfufa;
  *  limitations under the License.
  */
 
-/**
- * @author Alexander Y. Kleymenov
+/*
+  @author Alexander Y. Kleymenov
  * @version $Revision$
  */
 

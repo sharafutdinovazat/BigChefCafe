@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:largeHeap="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:icon="@drawable/bigchief_logo">
         <activity
             android:name=".SplashScreen"
             android:icon="@drawable/bigchief_logo_black"
