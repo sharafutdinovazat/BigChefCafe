@@ -56,7 +56,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
             super(view);
             mTextViewTitle = view.findViewById(R.id.titleRC);
             mTextViewPrice = view.findViewById(R.id.priceRC);
-            mTextViewWeight = view.findViewById(R.id.weightRC);
+            mTextViewWeight = view.findViewById(R.id.weightRc);
             mTextViewTime = view.findViewById(R.id.timeRC);
             mImageView = view.findViewById(R.id.imageRc);
             mButtonAdd = view.findViewById(R.id.button_add_recycler);
@@ -146,6 +146,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
+        if (mDataset == null) return 0;
         if (mDataset.size() > current_url) {
             context.stopAnimation(true);
             return mDataset.get(current_url).size();
