@@ -8,6 +8,7 @@
     android:id="@+id/container">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -21,11 +22,10 @@
 
             <ImageView
 
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/bigchief_logo"
+                android:src="@drawable/ic_round_new"
                 android:visibility="visible" />
 
             <TextView
@@ -84,10 +84,13 @@
         android:id="@+id/recycler_buy"
         layout="@layout/layout_recycler_buy"
         android:visibility="invisible"/>
+
     <include
         android:id="@+id/recycler_is_empty"
         layout="@layout/layout_recycler_is_empty"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        app:layout_anchor="@+id/appBarLayout"
+        app:layout_anchorGravity="top|center" />
 
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/fab"-->

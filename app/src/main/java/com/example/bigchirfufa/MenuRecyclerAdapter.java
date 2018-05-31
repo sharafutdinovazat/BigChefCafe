@@ -56,7 +56,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
             super(view);
             mTextViewTitle = view.findViewById(R.id.titleRC);
             mTextViewPrice = view.findViewById(R.id.priceRC);
-            mTextViewWeight = view.findViewById(R.id.weightRc);
+            mTextViewWeight = view.findViewById(R.id.weightRC);
             mTextViewTime = view.findViewById(R.id.timeRC);
             mImageView = view.findViewById(R.id.imageRc);
             mButtonAdd = view.findViewById(R.id.button_add_recycler);

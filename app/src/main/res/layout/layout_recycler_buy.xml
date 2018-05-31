@@ -43,12 +43,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Итого:" />
+                    android:text="Итого:"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:typeface="sans" />
 
                 <Button
                     android:id="@+id/button_buy"
                     android:layout_width="241dp"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/recycler_add_btn"
+                    android:textColor="#ffffff"
                     android:text="Оформить заказ" />
 
             </LinearLayout>
