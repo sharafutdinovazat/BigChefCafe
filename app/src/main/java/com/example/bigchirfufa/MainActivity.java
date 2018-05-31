@@ -171,8 +171,8 @@ public class MainActivity extends AppCompatActivity
             for (Pair<Dish, Integer> dish: data) {
                 body += dish.first.title + " : в количестве " + dish.second.toString() + '\n';
             }
-            body += user.first_name.getText().toString() + " " + user.last_name.getText().toString() + '\n';
-            body += user.phone_number.getText().toString() + '\n' + user.adress.getText().toString();
+            body += " Имя: " + user.first_name.getText().toString() + '\n' + " Фамилия: " + user.last_name.getText().toString() + '\n';
+            body += " Номер телефона: " + user.phone_number.getText().toString() + '\n' + " Адресс: " + user.adress.getText().toString();
             new MailSenderAsynс().execute(body);
             recycler_buy_adapter.update_dataset(new ArrayList<Dish>());
             menu_recycler_adapter.mDataBuy.clear();

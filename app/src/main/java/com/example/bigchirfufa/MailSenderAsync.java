@@ -24,11 +24,11 @@ class MailSenderAsynс extends AsyncTask<String, Void, Void>
     @Override
     protected Void doInBackground(String... params) {
         try {
-            MailSender sender = new MailSender("eftonov_cerg@mail.ru", "expirience");
+            MailSender sender = new MailSender("bigchefufa@mail.ru", "999HsWfHm999");
             sender.sendMail("Новый Заказ!",
                     params[0],
-                    "eftonov_cerg@mail.ru",
-                    "eftonovcerg@gmail.com");
+                    "bigchefufa@mail.ru",
+                    "gagagii@mail.ru");
         } catch (Exception e) {
             Log.w("SendMail", e.getMessage(), e);
         }
