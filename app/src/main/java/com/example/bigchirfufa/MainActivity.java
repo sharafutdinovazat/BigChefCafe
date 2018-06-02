@@ -2,7 +2,9 @@ package com.example.bigchirfufa;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,12 +21,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -35,6 +42,8 @@ public class MainActivity extends AppCompatActivity
     MainMenuRecyclerAdapter adapter;
     MenuRecyclerAdapter menu_recycler_adapter;
     RecyclerBuyAdapter  recycler_buy_adapter;
+    private Button button66;
+    private TextView textView;
 
 
     private static MainActivity context;
@@ -65,6 +74,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+        button66 = (Button) findViewById(R.id.button66);
 
         ArrayList<com.example.bigchirfufa.MenuItem> animalNames = new ArrayList<com.example.bigchirfufa.MenuItem>();
         animalNames.add(new com.example.bigchirfufa.MenuItem("Мясо", R.drawable.meat));
@@ -80,12 +90,22 @@ public class MainActivity extends AppCompatActivity
         user.last_name = findViewById(R.id.last_name_id);
         user.phone_number = findViewById(R.id.phone_number_id);
         user.adress = findViewById(R.id.postal_address_id);
+        user.dom = findViewById(R.id.postal_dom_id);
+        user.kvartira = findViewById(R.id.postal_kv_id);
+        user.padik = findViewById(R.id.postal_padik_id);
+        user.ettage = findViewById(R.id.postal_ettage_id);
+
 
         SharedPreferences settings = getSharedPreferences("UserInfo", 0);
-        user.first_name .setText(settings.getString("first_name", "").toString());
+        user.first_name.setText(settings.getString("first_name", "").toString());
         user.last_name.setText(settings.getString("last_name", "").toString());
         user.phone_number.setText(settings.getString("phone_number", "").toString());
         user.adress.setText(settings.getString("address", "").toString());
+        user.dom.setText(settings.getString("dom", "").toString());
+        user.kvartira.setText(settings.getString("kvartira", "").toString());
+        user.padik.setText(settings.getString("padik", "").toString());
+        user.ettage.setText(settings.getString("ettage", "").toString());
+
 
 
 
@@ -117,9 +137,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+            button66.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeView(R.id.menu);
+            }
+        });
+
         findViewById(R.id.profile).setOnClickListener(this);
         changeView(R.id.menu);
-    }
+           }
 
     public void onDishClick(View view, Dish dish)
     {
@@ -156,7 +183,7 @@ public class MainActivity extends AppCompatActivity
             if (user.isEmpty())
             {
                 changeView(R.id.profile);
-                Toast.makeText(this, "Пожалуйста заполните профиль", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Пожалуйста, заполните личные данные", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -166,16 +193,23 @@ public class MainActivity extends AppCompatActivity
             editor.putString("last_name",user.last_name.getText().toString());
             editor.putString("phone_number",user.phone_number.getText().toString());
             editor.putString("address",user.adress.getText().toString());
+            editor.putString("dom",user.dom.getText().toString());
+            editor.putString("kvartira",user.kvartira.getText().toString());
+            editor.putString("padik",user.padik.getText().toString());
+            editor.putString("ettage",user.ettage.getText().toString());
+
             editor.commit();
 
             Toast.makeText(this, "Вы сделали покупку, заказ отправляется", Toast.LENGTH_SHORT).show();
             String body = "";
             ArrayList<Pair<Dish, Integer>> data = recycler_buy_adapter.mData;
             for (Pair<Dish, Integer> dish: data) {
-                body += dish.first.title + " : в количестве " + dish.second.toString() + '\n';
+                body += dish.first.title + " : в количестве " + dish.second.toString() + " шт " + '\n';
             }
             body += " Имя: " + user.first_name.getText().toString() + '\n' + " Фамилия: " + user.last_name.getText().toString() + '\n';
-            body += " Номер телефона: " + user.phone_number.getText().toString() + '\n' + " Адресс: " + user.adress.getText().toString();
+            body += " Номер телефона: " + user.phone_number.getText().toString() + '\n' + " Улица: " + user.adress.getText().toString() + '\n';
+            body += " Номер дома: " + user.dom.getText().toString() + '\n' + " Квартира: " + user.kvartira.getText().toString() + '\n';
+            body += " Подъезд: " + user.padik.getText().toString() + '\n' + " Этаж: " + user.ettage.getText().toString() + '\n';
             new MailSenderAsynс().execute(body);
             recycler_buy_adapter.update_dataset(new ArrayList<Dish>());
             menu_recycler_adapter.mDataBuy.clear();
@@ -186,7 +220,7 @@ public class MainActivity extends AppCompatActivity
             openQuitDialog();
             //onBackPressed();
         }
-    }
+         }
 
 
     @Override
@@ -214,6 +248,7 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onItemRecyclerClick(View view, int pos)
@@ -338,6 +373,10 @@ class User
     TextView last_name;
     TextView phone_number;
     TextView adress;
+    TextView dom;
+    TextView kvartira;
+    TextView padik;
+    TextView ettage;
 
     public boolean isEmpty()
     {
@@ -350,6 +389,22 @@ class User
             return true;
         }
         if (phone_number.getText().toString().isEmpty())
+        {
+            return true;
+        }
+        if (dom.getText().toString().isEmpty())
+        {
+            return true;
+        }
+        if (kvartira.getText().toString().isEmpty())
+        {
+            return true;
+        }
+        if (padik.getText().toString().isEmpty())
+        {
+            return true;
+        }
+        if (ettage.getText().toString().isEmpty())
         {
             return true;
         }

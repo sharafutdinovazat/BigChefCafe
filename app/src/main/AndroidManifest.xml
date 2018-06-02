@@ -11,10 +11,10 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor"
-        android:icon="@drawable/bigchief_logo">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".SplashScreen"
-            android:icon="@drawable/bigchief_logo_black"
+            android:icon="@mipmap/ic_launcher"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
@@ -26,7 +26,7 @@
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:icon="@drawable/bigchief_logo_black">
+            android:icon="@mipmap/ic_launcher">
 
         </activity>
             </application>

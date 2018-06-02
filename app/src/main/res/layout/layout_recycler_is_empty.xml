@@ -19,12 +19,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Ваша корзина, к сожалению, пуста. Сейчас самое время начать покупки! "
+        android:text="Ваша корзина, к сожалению, пуста. Самое время пиступить к покупкам! "
         android:textColor="@color/main_text_color"
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button66"
         android:layout_width="262dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"

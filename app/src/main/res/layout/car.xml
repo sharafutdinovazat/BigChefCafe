@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="О доставке"
+                android:text="Бесплатная доставка при заказе:"
                 android:textColor="@android:color/black"
                 android:textSize="24dp"
                 tools:layout_editor_absoluteX="16dp"

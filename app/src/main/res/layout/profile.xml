@@ -26,37 +26,125 @@
             android:orientation="vertical"
             android:id="@+id/layout_profile">
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Имя"
+                android:textColor="@color/main_text_color" />
+
             <EditText
                 android:id="@+id/first_name_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Имя"
+                android:hint="Введите имя"
                 android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Фамилия"
+                android:textColor="@color/main_text_color" />
 
             <EditText
                 android:id="@+id/last_name_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Фамилия"
+                android:hint="Введите фамилию"
                 android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Номер телефона"
+                android:textColor="@color/main_text_color" />
 
             <EditText
                 android:id="@+id/phone_number_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Тел. номер"
+                android:hint="Введите номер"
                 android:inputType="phone" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Улица"
+                android:textColor="@color/main_text_color" />
 
             <EditText
                 android:id="@+id/postal_address_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Адрес"
+                android:hint="Введите название улицы"
                 android:inputType="textPostalAddress" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Дом"
+                android:textColor="@color/main_text_color" />
+
+            <EditText
+                android:id="@+id/postal_dom_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Введите номер дома"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Квартира"
+                android:textColor="@color/main_text_color" />
+
+            <EditText
+                android:id="@+id/postal_kv_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Введите номер квартиры"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Подъезд"
+                android:textColor="@color/main_text_color" />
+
+            <EditText
+                android:id="@+id/postal_padik_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Введите номер подъезда"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Этаж"
+                android:textColor="@color/main_text_color" />
+
+            <EditText
+                android:id="@+id/postal_ettage_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Введите этаж"
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 
