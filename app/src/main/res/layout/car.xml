@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="443dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,42 +26,30 @@
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:padding="10dp"
-                android:text="О доставке"
+                android:text="@string/o_dostavke"
                 android:textColor="@color/main_text_color"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 android:layout_margin="8dp"
                 android:text="@string/pravila_pri_zakaze" />
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="355dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Бесплатная доставка при заказе:"
-                android:textColor="@android:color/black"
-                android:textSize="24dp"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="16dp" />
-
-            <TextView
                 android:id="@+id/textView4"
-                android:layout_width="347dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_margin="8dp"
                 android:gravity="center"
-                android:text="Пр. Октября, ул. Комсомольская, Российская - от 800 рублей"
+                android:text="@string/mangal"
                 android:textColor="@android:color/black"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
@@ -69,43 +57,28 @@
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="283dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
+                android:layout_margin="8dp"
                 android:gravity="center"
-                android:text="Черниковка, Сипайлово, Центр города - от 1000 рублей"
+                android:text="@string/besplatnaya_dostavka"
                 android:textColor="@android:color/black"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <TextView
-                android:id="@+id/textView6"
-
-                android:layout_width="282dp"
+                android:id="@+id/textView2"
+                android:layout_width="355dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="28dp"
                 android:gravity="center"
-                android:text="Зелёная роща, ХБК, ул. Пугачева - от 1200 рублей"
+                android:text="@string/ulitsi"
                 android:textColor="@android:color/black"
-                android:textSize="18dp"
-                app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="265dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:text="Шакша, Дёма, Инорс, Затон - от 1500 рублей"
-                android:textColor="@android:color/black"
-                android:textSize="18dp"
-                app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                android:textSize="24dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="16dp" />
 
         </LinearLayout>
 
