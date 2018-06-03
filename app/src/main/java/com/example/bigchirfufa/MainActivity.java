@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity
     RecyclerBuyAdapter  recycler_buy_adapter;
     private Button button66;
     private TextView textView;
+    private ImageView korzina;
+
 
 
     private static MainActivity context;
@@ -119,6 +121,7 @@ public class MainActivity extends AppCompatActivity
         factory =  new ImageFactory(findViewById(R.id.drawer_layout), this);
 
 
+
         buy_recycler_view = findViewById(R.id.recycler_buy_id);
         buy_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         recycler_buy_adapter = new RecyclerBuyAdapter(findViewById(R.id.drawer_layout), factory);
@@ -143,6 +146,15 @@ public class MainActivity extends AppCompatActivity
                 changeView(R.id.menu);
             }
         });
+
+            korzina = (ImageView) findViewById(R.id.korzina);
+            korzina.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    changeView(R.id.recycler_buy);
+
+                }
+            });
 
         findViewById(R.id.profile).setOnClickListener(this);
         changeView(R.id.menu);
