@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Введите номер квартиры"
-                android:inputType="textPersonName" />
+                android:inputType="phone" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Введите номер подъезда"
-                android:inputType="textPersonName" />
+                android:inputType="phone" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Введите этаж"
-                android:inputType="textPersonName" />
+                android:inputType="phone" />
 
         </LinearLayout>
 

@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Ваша корзина, к сожалению, пуста. Самое время пиступить к покупкам! "
+        android:text="Ваша корзина, к сожалению, пуста. Самое время приступить к покупкам!"
         android:textColor="@color/main_text_color"
         android:textSize="20sp" />
 

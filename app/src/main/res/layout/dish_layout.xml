@@ -37,6 +37,7 @@
             android:id="@+id/text_dish_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:text="TextView" />
 
     </LinearLayout>
