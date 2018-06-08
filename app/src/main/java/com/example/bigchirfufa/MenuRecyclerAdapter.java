@@ -125,8 +125,8 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         // create a new view
         View lay = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.dish_rec, parent, false);
+              return new ViewHolder(lay);
 
-        return new ViewHolder(lay);
     }
 
     // Replace the contents of a view (invoked by the layout manager)

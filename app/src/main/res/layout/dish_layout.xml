@@ -16,7 +16,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="top|right"
-        android:background="@drawable/btn_close" />
+        android:background="@drawable/btn_close"
+        android:visibility="invisible" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,11 +35,23 @@
             android:src="@drawable/drinks" />
 
         <TextView
+            android:id="@+id/titledish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:text="Title"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/text_dish_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="TextView" />
+            android:layout_margin="10dp"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 

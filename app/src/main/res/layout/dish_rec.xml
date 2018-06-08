@@ -30,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:paddingLeft="10dp"
                 android:text="Title"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
@@ -40,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="right"
+                android:gravity="center"
                 android:text="Time"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
@@ -50,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="right"
+                android:gravity="center"
                 android:text="Weight"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
@@ -60,15 +59,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                android:gravity="right"
+                android:gravity="center"
                 android:text="Price"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
             <Button
                 android:id="@+id/button_add_recycler"
-                android:layout_width="match_parent"
+                android:layout_width="177dp"
                 android:layout_height="37dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/recycler_add_btn"
                 android:text="Добавить в корзину"
                 android:textColor="#ffffff" />

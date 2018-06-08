@@ -165,9 +165,11 @@ public class MainActivity extends AppCompatActivity
         View btn_view = findViewById(R.id.button_close_dish_layout);
         ImageView img_view = findViewById(R.id.image_dish_layout);
         TextView txt_view = findViewById(R.id.text_dish_layout);
+        TextView titledish = findViewById(R.id.titledish);
 
         factory.set_image(img_view, dish.image + "big");
         txt_view.setText(dish.text);
+        titledish.setText(dish.title);
         btn_view.setOnClickListener(this);
         changeView(R.id.dish_layout);
     }
