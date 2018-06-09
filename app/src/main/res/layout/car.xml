@@ -23,60 +23,85 @@
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="15dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:text="@string/o_dostavke"
                 android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textView88"
+                android:layout_width="349dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/deistv"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView77"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="0dp"
+                android:text="@string/pravila_pri_zakaze"
+                android:textColor="@android:color/black"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView66"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/mangal2"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:text="@string/pravila_pri_zakaze"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="20dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:text="@string/mangal"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView55"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/besplatnaya_dostavka"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView44"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="20dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:text="@string/ulitsi"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="16dp" />
         </LinearLayout>

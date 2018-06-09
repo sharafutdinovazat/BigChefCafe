@@ -2,6 +2,8 @@ package com.example.bigchirfufa;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
@@ -21,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +36,7 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity
@@ -77,6 +81,14 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         button66 = (Button) findViewById(R.id.button66);
+
+
+
+        Typeface mFont = Typeface.createFromAsset(getAssets(), "fonts/calibril.ttf");
+        ViewGroup root = (ViewGroup)findViewById(R.id.drawer_layout);
+        setFont(root, mFont);
+
+
 
         ArrayList<com.example.bigchirfufa.MenuItem> animalNames = new ArrayList<com.example.bigchirfufa.MenuItem>();
         animalNames.add(new com.example.bigchirfufa.MenuItem("Мясо", R.drawable.meat));
@@ -159,10 +171,26 @@ public class MainActivity extends AppCompatActivity
         findViewById(R.id.profile).setOnClickListener(this);
         changeView(R.id.menu);
            }
+    /*
+* Sets the font on all TextViews in the ViewGroup. Searches
+recursively for all inner ViewGroups as well. Just add a
+check for any other views you want to set as well (EditText,
+etc.)
+*/
+    public void setFont(ViewGroup group, Typeface font) {
+        int count = group.getChildCount();
+        View v;
+        for(int i = 0; i < count; i++) {
+            v = group.getChildAt(i);
+            if(v instanceof TextView || v instanceof Button /*etc.*/)
+                ((TextView)v).setTypeface(font);
+            else if(v instanceof ViewGroup)
+                setFont((ViewGroup)v, font);
+        }
+    }
 
     public void onDishClick(View view, Dish dish)
     {
-        View btn_view = findViewById(R.id.button_close_dish_layout);
         ImageView img_view = findViewById(R.id.image_dish_layout);
         TextView txt_view = findViewById(R.id.text_dish_layout);
         TextView titledish = findViewById(R.id.titledish);
@@ -170,7 +198,6 @@ public class MainActivity extends AppCompatActivity
         factory.set_image(img_view, dish.image + "big");
         txt_view.setText(dish.text);
         titledish.setText(dish.title);
-        btn_view.setOnClickListener(this);
         changeView(R.id.dish_layout);
     }
 
@@ -229,12 +256,7 @@ public class MainActivity extends AppCompatActivity
             menu_recycler_adapter.mDataBuy.clear();
             changeView(R.id.recycler_is_empty);
         }
-        if (id == R.id.button_close_dish_layout)
-        {
-            openQuitDialog();
-            //onBackPressed();
-        }
-         }
+    }
 
 
     @Override
@@ -378,6 +400,10 @@ public class MainActivity extends AppCompatActivity
         menu_recycler_view.setAdapter(menu_recycler_adapter);
         current_adapter = 1;
         changeView(R.id.menu);
+        Typeface mFont = Typeface.createFromAsset(MainActivity.getAppContext().getAssets(), "fonts/calibril.ttf");
+        ViewGroup root = (ViewGroup) MainActivity.getAppContext().findViewById(R.id.menu);
+        MainActivity.getAppContext().setFont(root, mFont);
+
     }
 }
 

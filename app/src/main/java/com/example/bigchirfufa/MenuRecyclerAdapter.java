@@ -1,5 +1,6 @@
 package com.example.bigchirfufa;
 
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -140,7 +141,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         holder.mTextViewTime.setText(mDataset.get(current_url).get(position).time);
         holder.img_url = mDataset.get(current_url).get(position).image;
         factory.set_image(holder.mImageView, mDataset.get(current_url).get(position).image);
-        //2131230822
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
