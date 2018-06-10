@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -28,11 +27,14 @@ import android.widget.Toast;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class MainActivity extends AppCompatActivity
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     private Button button66;
     private TextView textView;
     private ImageView korzina;
+    private NewsAdapter news_adapter;
 
     //https://api.vk.com/method/wall.get?owner_id=-106468312&v=5.52&access_token=a1b7b189a1b7b189a1b7b189c0a1d30d21aa1b7a1b7b189faaaf5bdd028cdee78829ab4
 
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity
 
     RecyclerView menu_recycler_view;
     RecyclerView buy_recycler_view;
+    RecyclerView news_recycler;
 
     ImageFactory factory;
 
@@ -116,6 +120,7 @@ public class MainActivity extends AppCompatActivity
 
 
         menu_recycler_view = findViewById(R.id.menuRcV);
+        news_recycler = findViewById(R.id.news_recycler);
         menu_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MainMenuRecyclerAdapter(this, animalNames);
         adapter.setClickListener(this);
@@ -131,6 +136,8 @@ public class MainActivity extends AppCompatActivity
         recycler_buy_adapter.setClickListener(this);
 
         menu_recycler_adapter = new MenuRecyclerAdapter(recycler_buy_adapter, factory, this);
+
+
 
         findViewById(R.id.button_buy).setOnClickListener(this);
 
@@ -158,8 +165,33 @@ public class MainActivity extends AppCompatActivity
 
     public void parse_news(String html)
     {
-        Log.w("Parsing news", html);
+        ArrayList<Pair<String, String>> news = new ArrayList<Pair<String, String>>();
+        try
+        {
+            JSONObject object = (JSONObject) new JSONParser().parse(html);
+            JSONObject tmp_object = (JSONObject) object.get("response");
+            JSONArray posts = (JSONArray) tmp_object.get("items");
+            Iterator iter = posts.iterator();
+            while(iter.hasNext())
+            {
+                JSONObject post = (JSONObject) iter.next();
+                String text = (String) post.get("text");
+                JSONObject attachments = (JSONObject)((JSONArray)post.get("attachments")).get(0);
+                JSONObject photo = (JSONObject)attachments.get("photo");
+                String photo_url = (String)photo.get("photo_807");
+                Pair<String, String> pair = new Pair<String, String>(text, photo_url);
+                news.add(pair);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
+        news_recycler.setLayoutManager(new LinearLayoutManager(this));
+        news_adapter = new NewsAdapter(this, news);
+        news_recycler.setAdapter(news_adapter);
+        changeView(R.id.news);
 
     }
 
@@ -183,8 +215,8 @@ public class MainActivity extends AppCompatActivity
 
         final ProgressBar progress_view = findViewById(R.id.progress_bar_dish);
         final ImageView image_view = img_view;
-        Picasso.with(context).load(dish.image)
-                .resize(600, 400)
+        Picasso.get().load(dish.image)
+                .resize(500, 400)
                 .into(img_view, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -201,7 +233,7 @@ public class MainActivity extends AppCompatActivity
                     }
 
                     @Override
-                    public void onError() {
+                    public void onError(Exception e) {
 
                     }
                 });
@@ -489,15 +521,15 @@ class DownloadNews extends AsyncTask<String, Void, String>
 {
     @Override
     protected String doInBackground(String... params) {
-        Document doc = new Document(params[0]);
+        String html = "";
         try {
-            doc = Jsoup.connect(params[0]).timeout(500).get();
+           html = Jsoup.connect(params[0]).ignoreContentType(true).execute().body();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        return doc.toString();
+        return html;
     }
 
     @Override
