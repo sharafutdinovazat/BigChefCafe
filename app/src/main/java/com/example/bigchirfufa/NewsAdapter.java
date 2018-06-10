@@ -44,7 +44,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.myTextView.setText(news.first);
         final ImageView img_view = holder.myImageView;
         final ProgressBar progress_view = holder.myProgressBar;
-        Picasso.with(MainActivity.getAppContext()).load(news.second).into(holder.myImageView, new Callback() {
+        Picasso.get().load(news.second)
+                .resize(MainActivity.getAppContext().getWindow().getDecorView().getWidth(), 0)
+                .into(holder.myImageView, new Callback() {
             @Override
             public void onSuccess() {
 
@@ -60,7 +62,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             }
 
             @Override
-            public void onError() {
+            public void onError(Exception e) {
 
             }
         });

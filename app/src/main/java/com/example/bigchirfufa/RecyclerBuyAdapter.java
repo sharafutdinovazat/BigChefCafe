@@ -57,7 +57,7 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
         holder.myTextViewPrice.setText(dish.first.price + " x " + holder.dish.count);
         final ProgressBar progress_view = holder.progres_bar;
         final ImageView image_view = holder.myImageView;
-        Picasso.with(MainActivity.getAppContext()).load(dish.first.image)
+        Picasso.get().load(dish.first.image)
                 .resize(250, 150)
                 .into(holder.myImageView, new Callback() {
                     @Override
@@ -75,7 +75,7 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
                     }
 
                     @Override
-                    public void onError() {
+                    public void onError(Exception e) {
 
                     }
                 });
