@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Введите номер дома"
-                android:inputType="textPersonName" />
+                android:inputType="phone" />
 
             <TextView
                 android:id="@+id/textView13"
