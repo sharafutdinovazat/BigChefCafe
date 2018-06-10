@@ -2,6 +2,7 @@ package com.example.bigchirfufa;
 
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -26,6 +28,10 @@ import android.widget.Toast;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -40,7 +46,7 @@ public class MainActivity extends AppCompatActivity
     private TextView textView;
     private ImageView korzina;
 
-
+    //https://api.vk.com/method/wall.get?owner_id=-106468312&v=5.52&access_token=a1b7b189a1b7b189a1b7b189c0a1d30d21aa1b7a1b7b189faaaf5bdd028cdee78829ab4
 
     private static MainActivity context;
     //current adapter
@@ -145,6 +151,16 @@ public class MainActivity extends AppCompatActivity
 
         findViewById(R.id.profile).setOnClickListener(this);
         changeView(R.id.menu);
+        String api_url = "https://api.vk.com/method/wall.get?owner_id=-106468312&v=5.52&access_token=a1b7b189a1b7b189a1b7b189c0a1d30d21aa1b7a1b7b189faaaf5bdd028cdee78829ab4";
+        DownloadNews news = new DownloadNews();
+        news.execute(api_url);
+    }
+
+    public void parse_news(String html)
+    {
+        Log.w("Parsing news", html);
+
+
     }
 
     public void setFont(ViewGroup group, Typeface font) {
@@ -335,31 +351,31 @@ public class MainActivity extends AppCompatActivity
             menu_recycler_view.setAdapter(adapter);
             changeView(R.id.menu);
 
-        } else if (id == R.id.nav_about)
+        } else if (id == R.id.nav_app)
         {
             changeView(R.id.about_app);
         } else if (id == R.id.nav_car)
         {
             changeView(R.id.car);
 
-        } else if (id == R.id.nav_news)
-        {
+        } else if (id == R.id.nav_news) {
             changeView(R.id.news);
-        } else if (id == R.id.nav_recycler_buy)
-        {
-            buy_recycler_view.getRecycledViewPool().clear();
-            if ((menu_recycler_adapter.mDataBuy == null) || (menu_recycler_adapter.mDataBuy.size() == 0))
-            {
-                changeView(R.id.recycler_is_empty);
-            }
-            else {
-                //recycler_buy_adapter.update_dataset(menu_recycler_adapter.mDataBuy);
-                menu_recycler_adapter.mDataBuy.clear();
-                buy_recycler_view.setAdapter(recycler_buy_adapter);
-                current_adapter = 2;
-                changeView(R.id.recycler_buy);
-            }
         }
+//        } else if (id == R.id.nav_recycler_buy)
+//        {
+//            buy_recycler_view.getRecycledViewPool().clear();
+//            if ((menu_recycler_adapter.mDataBuy == null) || (menu_recycler_adapter.mDataBuy.size() == 0))
+//            {
+//                changeView(R.id.recycler_is_empty);
+//            }
+//            else {
+//                //recycler_buy_adapter.update_dataset(menu_recycler_adapter.mDataBuy);
+//                menu_recycler_adapter.mDataBuy.clear();
+//                buy_recycler_view.setAdapter(recycler_buy_adapter);
+//                current_adapter = 2;
+//                changeView(R.id.recycler_buy);
+//            }
+//        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -468,3 +484,26 @@ class User
     }
 }
 
+
+class DownloadNews extends AsyncTask<String, Void, String>
+{
+    @Override
+    protected String doInBackground(String... params) {
+        Document doc = new Document(params[0]);
+        try {
+            doc = Jsoup.connect(params[0]).timeout(500).get();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return doc.toString();
+    }
+
+    @Override
+    protected void onPostExecute(String html)
+    {
+        MainActivity.getAppContext().parse_news(html);
+    }
+
+}
