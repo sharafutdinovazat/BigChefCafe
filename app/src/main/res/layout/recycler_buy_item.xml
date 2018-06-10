@@ -35,9 +35,11 @@
                 android:id="@+id/title_recycler_buy_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
+                android:layout_gravity="right|center_vertical"
+                android:gravity="right"
+                android:paddingRight="15dp"
                 android:text="Title"
+                android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
             <TextView
@@ -46,7 +48,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:gravity="right"
+                android:paddingRight="15dp"
                 android:text="Price"
+                android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
             <RelativeLayout

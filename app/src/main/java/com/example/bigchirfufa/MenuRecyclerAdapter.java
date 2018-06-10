@@ -147,7 +147,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         final ProgressBar progress_view = holder.progres_bar;
         final ImageView image_view = holder.mImageView;
         Picasso.with(context).load(mDataset.get(current_url).get(position).image)
-                .resize(250, 150)
+                .resize(250, 200)
                 .into(holder.mImageView, new Callback() {
                     @Override
                     public void onSuccess() {

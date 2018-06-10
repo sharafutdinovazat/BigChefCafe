@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="Ваша корзина, к сожалению, пуста. Самое время приступить к покупкам!"
-        android:textColor="@color/main_text_color"
+        android:textColor="@android:color/black"
         android:textSize="20sp" />
 
     <Button

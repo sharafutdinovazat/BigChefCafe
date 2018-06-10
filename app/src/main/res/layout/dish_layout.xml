@@ -20,19 +20,21 @@
         <ImageView
             android:id="@+id/image_dish_layout"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="270dp"
             android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="20dp"
             android:maxHeight="250dp"
             android:minHeight="147dp"
             android:visibility="gone" />
+
         <ProgressBar
             android:id="@+id/progress_bar_dish"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="20dp"
             android:maxHeight="250dp"
-            android:minHeight="147dp"
-            />
+            android:minHeight="147dp" />
 
         <TextView
             android:id="@+id/titledish"

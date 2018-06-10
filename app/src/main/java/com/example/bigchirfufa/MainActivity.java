@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity
         final ProgressBar progress_view = findViewById(R.id.progress_bar_dish);
         final ImageView image_view = img_view;
         Picasso.with(context).load(dish.image)
-                .resize(500, 400)
+                .resize(600, 400)
                 .into(img_view, new Callback() {
                     @Override
                     public void onSuccess() {
