@@ -1,6 +1,5 @@
 package com.example.bigchirfufa;
 
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,12 +9,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -140,8 +140,9 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         holder.mTextViewWeight.setText(mDataset.get(current_url).get(position).weight);
         holder.mTextViewTime.setText(mDataset.get(current_url).get(position).time);
         holder.img_url = mDataset.get(current_url).get(position).image;
-        factory.set_image(holder.mImageView, mDataset.get(current_url).get(position).image);
-
+        Picasso.with(context).load(mDataset.get(current_url).get(position).image)
+                .resize(250, 150)
+                .into(holder.mImageView);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -184,7 +185,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
                             String time = food.getElementsByClass("menusection-time").text();
                             String price = food.getElementsByClass("menusection-price").text();
                             String weight = food.getElementsByClass("menusection-weight").text();
-                            String image = food.getElementsByClass("menusection-link").attr("href");
+                            String image = "http://bigchefufa.ru" + food.getElementsByClass("menusection-link").attr("href");
                             String text = Jsoup.parse(food.childNode(3).attr("data-title").toString()).text();
                             factory.load_image(image);
                             dishArrayList.get(i).add(new Dish(title, time, price, weight, image, text));

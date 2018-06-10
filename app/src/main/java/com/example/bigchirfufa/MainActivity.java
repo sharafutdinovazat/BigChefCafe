@@ -1,42 +1,30 @@
 package com.example.bigchirfufa;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
-import android.util.Pair;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Pair;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity
@@ -80,14 +68,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        button66 = (Button) findViewById(R.id.button66);
 
 
 
         Typeface mFont = Typeface.createFromAsset(getAssets(), "fonts/calibril.ttf");
-        ViewGroup root = (ViewGroup)findViewById(R.id.drawer_layout);
+        ViewGroup root = (ViewGroup) findViewById(R.id.drawer_layout);
         setFont(root, mFont);
-
 
 
         ArrayList<com.example.bigchirfufa.MenuItem> animalNames = new ArrayList<com.example.bigchirfufa.MenuItem>();
@@ -121,8 +107,6 @@ public class MainActivity extends AppCompatActivity
         user.ettage.setText(settings.getString("ettage", "").toString());
 
 
-
-
         menu_recycler_view = findViewById(R.id.menuRcV);
         menu_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MainMenuRecyclerAdapter(this, animalNames);
@@ -130,8 +114,7 @@ public class MainActivity extends AppCompatActivity
         menu_recycler_view.setAdapter(adapter);
         current_adapter = 0;
 
-        factory =  new ImageFactory(findViewById(R.id.drawer_layout), this);
-
+        factory = new ImageFactory(findViewById(R.id.drawer_layout), this);
 
 
         buy_recycler_view = findViewById(R.id.recycler_buy_id);
@@ -152,31 +135,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-            button66.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeView(R.id.menu);
-            }
-        });
+        Button recycler_empty_btn = (Button) findViewById(R.id.recycler_start_buy);
+        recycler_empty_btn.setOnClickListener(this);
 
-            korzina = (ImageView) findViewById(R.id.korzina);
-            korzina.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    changeView(R.id.recycler_buy);
-
-                }
-            });
+        ImageView recycler_bar_image = (ImageView) findViewById(R.id.recycler_bar_image);
+        recycler_bar_image.setOnClickListener(this);
 
         findViewById(R.id.profile).setOnClickListener(this);
         changeView(R.id.menu);
-           }
-    /*
-* Sets the font on all TextViews in the ViewGroup. Searches
-recursively for all inner ViewGroups as well. Just add a
-check for any other views you want to set as well (EditText,
-etc.)
-*/
+    }
+
     public void setFont(ViewGroup group, Typeface font) {
         int count = group.getChildCount();
         View v;
@@ -195,7 +163,9 @@ etc.)
         TextView txt_view = findViewById(R.id.text_dish_layout);
         TextView titledish = findViewById(R.id.titledish);
 
-        factory.set_image(img_view, dish.image + "big");
+        Picasso.with(context).load(dish.image)
+                .resize(400, 300)
+                .into(img_view);
         txt_view.setText(dish.text);
         titledish.setText(dish.title);
         changeView(R.id.dish_layout);
@@ -219,6 +189,26 @@ etc.)
     public void onClick(View view)
     {
         int id = view.getId();
+        if (id == R.id.recycler_start_buy)
+        {
+            changeView(R.id.menu);
+            return;
+        }
+        if (id == R.id.recycler_bar_image)
+        {
+            buy_recycler_view.getRecycledViewPool().clear();
+            if ((menu_recycler_adapter.mDataBuy == null) || (menu_recycler_adapter.mDataBuy.size() == 0))
+            {
+                changeView(R.id.recycler_is_empty);
+            }
+            else {
+                recycler_buy_adapter.update_dataset(menu_recycler_adapter.mDataBuy);
+                buy_recycler_view.setAdapter(recycler_buy_adapter);
+                current_adapter = 2;
+                changeView(R.id.recycler_buy);
+            }
+            return;
+        }
         if (id == R.id.button_buy)
         {
             if (user.isEmpty())

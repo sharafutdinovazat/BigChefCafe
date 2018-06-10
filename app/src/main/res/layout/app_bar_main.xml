@@ -38,7 +38,7 @@
                 android:textColor="@android:color/white" />
 
             <ImageView
-                android:id="@+id/korzina"
+                android:id="@+id/recycler_bar_image"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="right"
