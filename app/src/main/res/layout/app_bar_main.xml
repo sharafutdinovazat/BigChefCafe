@@ -65,17 +65,30 @@
         layout="@layout/menulayout"
         android:visibility="invisible"/>
     <include
-        android:id="@+id/navstar"
-        layout="@layout/nav_star"
+        android:id="@+id/news"
+        layout="@layout/news"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/profile"
+        layout="@layout/profile"
         android:visibility="invisible"/>
     <include
         android:id="@+id/car"
         layout="@layout/car"
         android:visibility="invisible"/>
     <include
-        android:id="@+id/profile"
-        layout="@layout/profile"
+        android:id="@+id/about"
+        layout="@layout/about"
         android:visibility="invisible"/>
+    <include
+        android:id="@+id/feedback"
+        layout="@layout/feedback"
+        android:visibility="invisible"/>
+    <include
+        android:id="@+id/about_app"
+        layout="@layout/about_app"
+        android:visibility="invisible"/>
+
     <include
         android:id="@+id/meat"
         layout="@layout/menu_meat"
@@ -91,14 +104,5 @@
         android:visibility="invisible"
         app:layout_anchor="@+id/appBarLayout"
         app:layout_anchorGravity="top|center" />
-
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_margin="@dimen/fab_margin"-->
-        <!--app:srcCompat="@android:drawable/ic_dialog_email"-->
-        <!--android:visibility="invisible"/>-->
 
 </android.support.design.widget.CoordinatorLayout>
