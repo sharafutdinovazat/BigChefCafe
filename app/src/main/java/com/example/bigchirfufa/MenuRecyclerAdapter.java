@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
@@ -51,6 +53,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         public ImageView mImageView;
         public Button   mButtonAdd;
         public String img_url;
+        public ProgressBar progres_bar;
 
 
         public ViewHolder(View view) {
@@ -61,6 +64,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
             mTextViewTime = view.findViewById(R.id.timeRC);
             mImageView = view.findViewById(R.id.imageRc);
             mButtonAdd = view.findViewById(R.id.button_add_recycler);
+            progres_bar = view.findViewById(R.id.progress_bar_dish);
             //view.setOnClickListener(this);
             mImageView.setOnClickListener(this);
             mButtonAdd.setOnClickListener(this);
@@ -140,9 +144,30 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         holder.mTextViewWeight.setText(mDataset.get(current_url).get(position).weight);
         holder.mTextViewTime.setText(mDataset.get(current_url).get(position).time);
         holder.img_url = mDataset.get(current_url).get(position).image;
+        final ProgressBar progress_view = holder.progres_bar;
+        final ImageView image_view = holder.mImageView;
         Picasso.with(context).load(mDataset.get(current_url).get(position).image)
                 .resize(250, 150)
-                .into(holder.mImageView);
+                .into(holder.mImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                        if ((progress_view != null) && (image_view != null))
+                        {
+                            progress_view.setVisibility(View.GONE);
+                            image_view.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            throw new IllegalStateException("162: не удается найти картинку и прогресс бар!");
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
