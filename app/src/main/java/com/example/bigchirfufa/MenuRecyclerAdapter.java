@@ -85,8 +85,8 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
             }
             if (view.getId() == R.id.button_add_recycler)
             {
-                mDataBuy.add(dish);
-                recycler_adapter.update_dataset(mDataBuy);
+                recycler_adapter.update_dataset(dish);
+
             }
 
 

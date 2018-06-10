@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -49,40 +52,55 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
         holder.myTextViewTitle.setText(dish.first.title);
         holder.myTextViewCount.setText(dish.second.toString());
 
-        holder.dish = dish.first;//new Dish(holder.myTextViewTitle.getText().toString(), "", dish.first.price, "", "",  "");
+        holder.dish = dish.first;
         holder.dish.count = dish.second;
         holder.myTextViewPrice.setText(dish.first.price + " x " + holder.dish.count);
-        factory.set_image(holder.myImageView, dish.first.image);
+        final ProgressBar progress_view = holder.progres_bar;
+        final ImageView image_view = holder.myImageView;
+        Picasso.with(MainActivity.getAppContext()).load(dish.first.image)
+                .resize(250, 150)
+                .into(holder.myImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
 
+                        if ((progress_view != null) && (image_view != null))
+                        {
+                            progress_view.setVisibility(View.GONE);
+                            image_view.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            throw new IllegalStateException("162: не удается найти картинку и прогресс бар!");
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
     }
 
-    public void update_dataset(ArrayList<Dish> dishes)
+    public void update_dataset(Dish dish)
     {
         summa = 0;
-        if (dishes == null)
+        if (dish == null)
         {
             return;
         }
-        ArrayList<Pair<Dish, Integer>> mData_tmp = new ArrayList<Pair<Dish, Integer>>();
+        if (mData == null) mData = new ArrayList<Pair<Dish, Integer>>();
         boolean is_set = false;
-        ArrayList<Dish> d_tmp = new ArrayList<Dish>();
-        for (int i = 0; i < dishes.size(); i++)
+
+        for (int j = 0; j < mData.size(); j++)
         {
-            for (int j = 0; j < mData_tmp.size(); j++)
+            if (mData.get(j).first.title.toString().equals(dish.title.toString()))
             {
-                if (mData_tmp.get(j).first.title.toString().equals(dishes.get(i).title.toString()))
-                {
-                    mData_tmp.set(j, new Pair<Dish, Integer>(dishes.get(i), mData_tmp.get(j).second + 1));
-                    is_set = true;
-                }
+                mData.set(j, new Pair<Dish, Integer>(dish, mData.get(j).second + 1));
+                is_set = true;
             }
-            if (!is_set)
-            {
-                mData_tmp.add(new Pair<Dish, Integer>(dishes.get(i), 1));
-            }
-            is_set = false;
         }
-        mData = mData_tmp;
+        if (!is_set)
+            mData.add(new Pair<Dish, Integer>(dish, 1));
         summ_update();
         this.notifyDataSetChanged();
     }
@@ -123,6 +141,7 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
         TextView myTextViewPrice;
         TextView myTextViewCount;
         ImageView myImageView;
+        ProgressBar progres_bar;
         Button btn_inc;
         Button btn_dec;
         Dish dish;
@@ -137,7 +156,7 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
             myTextViewPrice = itemView.findViewById(R.id.price_recycler_buy_item);
             myTextViewCount = itemView.findViewById(R.id.count_recycler_buy_item);
             myImageView = itemView.findViewById(R.id.image_recycler_buy_item);
-
+            progres_bar = itemView.findViewById(R.id.progress_bar_dish);
         }
 
         @Override
@@ -170,10 +189,10 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
             }
             if (mData.isEmpty())
             {
-                update_dataset(new ArrayList<Dish>());
                 MainActivity.getAppContext().menu_recycler_adapter.mDataBuy.clear();
                 MainActivity.getAppContext().changeView(R.id.recycler_is_empty);
             }
+
             this_context.notifyDataSetChanged();
             summ_update();
 

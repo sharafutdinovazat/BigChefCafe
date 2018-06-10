@@ -19,9 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -163,9 +165,30 @@ public class MainActivity extends AppCompatActivity
         TextView txt_view = findViewById(R.id.text_dish_layout);
         TextView titledish = findViewById(R.id.titledish);
 
+        final ProgressBar progress_view = findViewById(R.id.progress_bar_dish);
+        final ImageView image_view = img_view;
         Picasso.with(context).load(dish.image)
-                .resize(400, 300)
-                .into(img_view);
+                .resize(500, 400)
+                .into(img_view, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                        if ((progress_view != null) && (image_view != null))
+                        {
+                            progress_view.setVisibility(View.GONE);
+                            image_view.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            throw new IllegalStateException("162: не удается найти картинку и прогресс бар!");
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
         txt_view.setText(dish.text);
         titledish.setText(dish.title);
         changeView(R.id.dish_layout);
@@ -197,12 +220,13 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.recycler_bar_image)
         {
             buy_recycler_view.getRecycledViewPool().clear();
-            if ((menu_recycler_adapter.mDataBuy == null) || (menu_recycler_adapter.mDataBuy.size() == 0))
+            if (recycler_buy_adapter.mData == null || recycler_buy_adapter.mData.isEmpty())
             {
                 changeView(R.id.recycler_is_empty);
             }
             else {
-                recycler_buy_adapter.update_dataset(menu_recycler_adapter.mDataBuy);
+                //recycler_buy_adapter.update_dataset(menu_recycler_adapter.mDataBuy);
+                menu_recycler_adapter.mDataBuy.clear();
                 buy_recycler_view.setAdapter(recycler_buy_adapter);
                 current_adapter = 2;
                 changeView(R.id.recycler_buy);
@@ -242,8 +266,7 @@ public class MainActivity extends AppCompatActivity
             body += " Номер дома: " + user.dom.getText().toString() + '\n' + " Квартира: " + user.kvartira.getText().toString() + '\n';
             body += " Подъезд: " + user.padik.getText().toString() + '\n' + " Этаж: " + user.ettage.getText().toString() + '\n';
             new MailSenderAsynс().execute(body);
-            recycler_buy_adapter.update_dataset(new ArrayList<Dish>());
-            menu_recycler_adapter.mDataBuy.clear();
+            recycler_buy_adapter.mData.clear();
             changeView(R.id.recycler_is_empty);
         }
     }
@@ -330,7 +353,8 @@ public class MainActivity extends AppCompatActivity
                 changeView(R.id.recycler_is_empty);
             }
             else {
-                recycler_buy_adapter.update_dataset(menu_recycler_adapter.mDataBuy);
+                //recycler_buy_adapter.update_dataset(menu_recycler_adapter.mDataBuy);
+                menu_recycler_adapter.mDataBuy.clear();
                 buy_recycler_view.setAdapter(recycler_buy_adapter);
                 current_adapter = 2;
                 changeView(R.id.recycler_buy);
@@ -354,6 +378,8 @@ public class MainActivity extends AppCompatActivity
         if (active_view.getId() == R.id.recycler_is_empty)
         {
             changeView(R.id.menu);
+            recycler_buy_adapter.mData.clear();
+            //recycler_buy_adapter.update_dataset(new ArrayList<Dish>());
             return;
         }
         if (active_view.getId() == R.id.menu)

@@ -24,7 +24,15 @@
             android:layout_gravity="top|center_horizontal"
             android:maxHeight="250dp"
             android:minHeight="147dp"
-            android:src="@drawable/drinks" />
+            android:visibility="gone" />
+        <ProgressBar
+            android:id="@+id/progress_bar_dish"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="top|center_horizontal"
+            android:maxHeight="250dp"
+            android:minHeight="147dp"
+            />
 
         <TextView
             android:id="@+id/titledish"
