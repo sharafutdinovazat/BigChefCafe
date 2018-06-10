@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         stopAnimation(true);
         if (id == R.id.nav_mail) {
-/////////////////////////////////////////////////////////////////////
+            changeView(R.id.feedback);
         } else if (id == R.id.nav_profile)
         {
             changeView(R.id.profile);
@@ -335,16 +335,16 @@ public class MainActivity extends AppCompatActivity
             menu_recycler_view.setAdapter(adapter);
             changeView(R.id.menu);
 
-        } else if (id == R.id.nav_geolocation)
+        } else if (id == R.id.nav_about)
         {
-            //о ресторане;
+            changeView(R.id.about_app);
         } else if (id == R.id.nav_car)
         {
             changeView(R.id.car);
 
-        } else if (id == R.id.nav_app)
+        } else if (id == R.id.nav_news)
         {
-/////////////////////////////////////////////////////////////////////
+            changeView(R.id.news);
         } else if (id == R.id.nav_recycler_buy)
         {
             buy_recycler_view.getRecycledViewPool().clear();
