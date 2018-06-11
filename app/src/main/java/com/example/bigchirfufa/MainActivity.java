@@ -463,6 +463,11 @@ public class MainActivity extends AppCompatActivity
                 nextView(R.id.news);
                 break;
             }
+            case R.id.nav_about:
+            {
+                nextView(R.id.about);
+                break;
+            }
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
