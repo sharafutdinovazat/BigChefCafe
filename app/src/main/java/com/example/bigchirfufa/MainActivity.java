@@ -1,8 +1,10 @@
 package com.example.bigchirfufa;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity
     RecyclerView menu_view;
     RecyclerView buy_recycler_view;
     RecyclerView news_recycler_view;
-
+    ImageView imgmapsgoogle;
 
     User user;
 
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle("");
 
         views = new ArrayDeque<Integer>();
-
+        imgmapsgoogle = (ImageView) findViewById(R.id.igmgoglemaps);
         Typeface mFont = Typeface.createFromAsset(getAssets(), "fonts/calibril.ttf");
         ViewGroup root = (ViewGroup) findViewById(R.id.drawer_layout);
         setFont(root, mFont);
@@ -101,6 +103,15 @@ public class MainActivity extends AppCompatActivity
                 .setEmojiSpanIndicatorColor(Color.GREEN);
         EmojiCompat.init(config);
 
+
+        imgmapsgoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://www.google.ru/maps/place/BIG+CHEF/@54.764094,56.0121563,17z/data=!3m1!4b1!4m5!3m4!1s0x43d939c2846862f9:0x858c3be44067ab04!8m2!3d54.764094!4d56.014345"));
+                startActivity(i);
+            }
+        });
 
         ArrayList<com.example.bigchirfufa.MenuItem> animalNames = new ArrayList<com.example.bigchirfufa.MenuItem>();
         animalNames.add(new com.example.bigchirfufa.MenuItem("Мясо", R.drawable.meat));

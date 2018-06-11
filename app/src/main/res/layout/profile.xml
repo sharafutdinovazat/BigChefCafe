@@ -101,7 +101,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Введите название улицы"
-                android:inputType="textPostalAddress" />
+                android:inputType="textPostalAddress"
+                android:maxLength="25"/>
 
             <TextView
                 android:id="@+id/textView12"
@@ -118,7 +119,7 @@
                 android:ems="10"
                 android:hint="Введите номер дома"
                 android:inputType="phone"
-                android:maxLength="4" />
+                android:maxLength="6" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -167,7 +168,7 @@
                 android:ems="10"
                 android:hint="Введите этаж"
                 android:inputType="number"
-                android:maxLength="2" />
+                android:maxLength="3" />
 
         </LinearLayout>
 

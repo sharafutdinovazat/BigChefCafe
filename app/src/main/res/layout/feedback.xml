@@ -37,7 +37,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/feedback_text2"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,37 +63,12 @@
                     android:inputType="textPersonName"
                     android:maxLength="15" />
 
-                <EditText
-                    android:id="@+id/postal_email_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Введите электронную почту"
-                    android:inputType="textEmailAddress"
-                    android:maxLength="30" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Номер телефона"
-                    android:textColor="@color/main_text_color" />
-
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Фамилия"
                     android:textColor="@color/main_text_color" />
-
-                <EditText
-                    android:id="@+id/phone_number_feedback"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Введите номер"
-                    android:inputType="phone"
-                    android:maxLength="15" />
 
                 <EditText
                     android:id="@+id/last_name_id"
@@ -104,10 +80,57 @@
                     android:maxLength="20" />
 
                 <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Номер телефона"
+                    android:textColor="@color/main_text_color" />
+
+                <EditText
+                    android:id="@+id/phone_number_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Введите номер"
+                    android:inputType="phone"
+                    android:maxLength="15" />
+
+                <TextView
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Контактный email"
+                    android:textColor="@color/main_text_color" />
+
+                <EditText
+                    android:id="@+id/postal_email_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Введите электронную почту"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="30" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Выберите тему обращения"
+                    android:textColor="@color/main_text_color" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="Ваш комментарий"
                     android:textColor="@color/main_text_color" />
 
                 <EditText
@@ -119,36 +142,16 @@
                     android:inputType="textMultiLine"
                     android:minHeight="60dp" />
 
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center_horizontal"
-                    android:text="Ваш комментарий"
-                    android:textColor="@color/main_text_color" />
-
                 <Button
                     android:id="@+id/recycler_start_buy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/recycler_add_btn"
                     android:text="Отправить"
                     android:textColor="#ffffff" />
 
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Выберите тему обращения"
-                    android:textColor="@color/main_text_color" />
-
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </LinearLayout>
