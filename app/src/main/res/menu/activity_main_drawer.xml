@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
@@ -11,11 +10,11 @@
             android:title="Меню" />
         <item
             android:id="@+id/nav_news"
-            android:icon="@drawable/ic_menu_profile"
+            android:icon="@drawable/ic_menu_historyclock"
             android:title="Новости" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_geolocation"
+            android:icon="@drawable/ic_menu_profile"
             android:title="Личный кабинет" />
         <item
             android:id="@+id/nav_car"
@@ -23,19 +22,17 @@
             android:title="О доставке" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_historyclock"
-            android:title="О ресторане"/>
+            android:icon="@drawable/ic_cafe"
+            android:title="О Кафе" />
 
         <item
             android:id="@+id/nav_mail"
             android:icon="@drawable/ic_menu_mail"
-            android:title="Обратная связь"/>
+            android:title="Обратная связь" />
         <item
             android:id="@+id/nav_app"
-            android:icon="@drawable/ic_menu_app"
-            android:title="О приложении"/>
+            android:icon="@drawable/ic_information"
+            android:title="О приложении" />
 
     </group>
-
-
 </menu>
