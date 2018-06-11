@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    tools:layout_editor_absoluteY="137dp"
+    tools:showIn="@layout/app_bar_main"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TextView
@@ -80,7 +82,7 @@
                 android:textColor="@color/main_text_color" />
 
             <EditText
-                android:id="@+id/phone_number_id"
+                android:id="@+id/phone_number_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -125,13 +127,14 @@
                 android:text="Ваш комментарий"
                 android:textColor="@color/main_text_color" />
 
-            <TextView
+            <EditText
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:hint="Введите сообщение"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:minHeight="60dp" />
 
             <Button
                 android:id="@+id/recycler_start_buy"

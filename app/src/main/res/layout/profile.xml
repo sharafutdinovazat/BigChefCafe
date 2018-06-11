@@ -107,6 +107,7 @@
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="3"
                 android:text="Дом"
                 android:textColor="@color/main_text_color" />
 
@@ -123,6 +124,7 @@
                 android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="2"
                 android:text="Квартира"
                 android:textColor="@color/main_text_color" />
 
@@ -132,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Введите номер квартиры"
-                android:inputType="phone"
+                android:inputType="number"
                 android:maxLength="4" />
 
             <TextView
@@ -148,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Введите номер подъезда"
-                android:inputType="phone"
+                android:inputType="number"
                 android:maxLength="3" />
 
             <TextView
@@ -164,7 +166,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Введите этаж"
-                android:inputType="phone" />
+                android:inputType="number"
+                android:maxLength="2" />
 
         </LinearLayout>
 

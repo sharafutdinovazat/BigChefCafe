@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -436,10 +438,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_mail:
             {
                 nextView(R.id.feedback);
+                ((EditText)findViewById(R.id.phone_number_feedback)).addTextChangedListener(new PhoneNumberFormattingTextWatcher());
                 break;
             }
             case R.id.nav_profile:
             {
+                ((EditText)findViewById(R.id.phone_number_id)).addTextChangedListener(new PhoneNumberFormattingTextWatcher());
                 nextView(R.id.profile);
                 break;
             }
