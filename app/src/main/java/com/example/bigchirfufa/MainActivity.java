@@ -54,29 +54,19 @@ public class MainActivity extends AppCompatActivity
     MenuAdapter             menu_adapter;
     NewsAdapter             news_adapter;
     RecyclerBuyAdapter      recycler_buy_adapter;
-    
-    private Button button66;
-    private TextView textView;
-    private ImageView korzina;
-   
+
 
     private ArrayDeque<Integer> views;
 
     //https://api.vk.com/method/wall.get?owner_id=-106468312&v=5.52&access_token=a1b7b189a1b7b189a1b7b189c0a1d30d21aa1b7a1b7b189faaaf5bdd028cdee78829ab4
 
     private static MainActivity context;
-    //current main_menu_adapter
-    // 0 - main menu
-    // 1 - menu dishes
-    // 2 - recycler dishes
-    Integer current_adapter;
 
     RecyclerView main_menu_recycler_view;
     RecyclerView menu_view;
     RecyclerView buy_recycler_view;
     RecyclerView news_recycler_view;
 
-    ImageFactory factory;
 
     User user;
 
