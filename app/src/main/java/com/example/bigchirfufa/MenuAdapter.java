@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapter.ViewHolder> {
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
     public ArrayList<ArrayList<Dish>> mDataset;
 
@@ -33,15 +33,12 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     RecyclerBuyAdapter recycler_adapter;
 
     DownloadTask task;
-    ImageFactory factory;
 
     Integer current_url;
     private Timer timer;
     private DownloadTimer timer_task;
 
-    private MainActivity context;
-
-    public MenuRecyclerAdapter this_context;
+    public MenuAdapter this_context;
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -80,12 +77,12 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
             //Dish dish = new Dish(mTextViewTitle.getText().toString(), mTextViewTime.getText().toString(), mTextViewPrice.getText().toString(), mTextViewWeight.getText().toString(), img_url, "");
             if (view.getId() == R.id.imageRc)
             {
-                context.onDishClick(view, dish);
+                MainActivity.getAppContext().onDishClick(view, dish);
                 return;
             }
             if (view.getId() == R.id.button_add_recycler)
             {
-                recycler_adapter.update_dataset(dish);
+                MainActivity.getAppContext().recycler_buy_adapter.update_dataset(dish);
 
             }
 
@@ -94,12 +91,9 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MenuRecyclerAdapter(RecyclerBuyAdapter adapter, ImageFactory factory, MainActivity context) {
-        this.context = context;
-        this.factory = factory;
+    public MenuAdapter() {
         timer = new Timer();
         timer_task = new DownloadTimer();
-        recycler_adapter = adapter;
         this_context = this;
         task = new DownloadTask();
         parse_urls = new ArrayList<String>();
@@ -125,7 +119,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MenuRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         // create a new view
         View lay = LayoutInflater.from(parent.getContext())
@@ -175,10 +169,10 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     public int getItemCount() {
         if (mDataset == null) return 0;
         if (mDataset.size() > current_url) {
-            context.stopAnimation(true);
+            MainActivity.getAppContext().stopAnimation(true);
             return mDataset.get(current_url).size();
         } else {
-            context.stopAnimation(false);
+            MainActivity.getAppContext().stopAnimation(false);
             return 0;
         }
     }
@@ -212,7 +206,6 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
                             String weight = food.getElementsByClass("menusection-weight").text();
                             String image = "http://bigchefufa.ru" + food.getElementsByClass("menusection-link").attr("href");
                             String text = Jsoup.parse(food.childNode(3).attr("data-title").toString()).text();
-                            factory.load_image(image);
                             dishArrayList.get(i).add(new Dish(title, time, price, weight, image, text));
                         }
                         String name = metaElement.attr("name");

@@ -90,6 +90,11 @@
         android:visibility="invisible"/>
 
     <include
+        android:id="@+id/main_menu"
+        layout="@layout/menu_layout"
+        android:visibility="invisible"/>
+
+    <include
         android:id="@+id/meat"
         layout="@layout/menu_meat"
         android:visibility="invisible"/>

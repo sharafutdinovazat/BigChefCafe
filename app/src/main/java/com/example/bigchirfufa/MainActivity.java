@@ -1,10 +1,14 @@
 package com.example.bigchirfufa;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.FontRequestEmojiCompatConfig;
+import android.support.v4.provider.FontRequest;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -33,34 +37,42 @@ import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainMenuRecyclerAdapter.ItemClickListener, RecyclerBuyAdapter.ItemClickListener, View.OnClickListener{
+    
     public View active_view = null;
-    public View incative_view = null;
-    MainMenuRecyclerAdapter adapter;
-    MenuRecyclerAdapter menu_recycler_adapter;
-    RecyclerBuyAdapter  recycler_buy_adapter;
+    public View inactive_view = null;
+    
+    MainMenuRecyclerAdapter main_menu_adapter;
+    MenuAdapter             menu_adapter;
+    NewsAdapter             news_adapter;
+    RecyclerBuyAdapter      recycler_buy_adapter;
+    
     private Button button66;
     private TextView textView;
     private ImageView korzina;
-    private NewsAdapter news_adapter;
+   
+
+    private ArrayDeque<Integer> views;
 
     //https://api.vk.com/method/wall.get?owner_id=-106468312&v=5.52&access_token=a1b7b189a1b7b189a1b7b189c0a1d30d21aa1b7a1b7b189faaaf5bdd028cdee78829ab4
 
     private static MainActivity context;
-    //current adapter
+    //current main_menu_adapter
     // 0 - main menu
     // 1 - menu dishes
     // 2 - recycler dishes
     Integer current_adapter;
 
-    RecyclerView menu_recycler_view;
+    RecyclerView main_menu_recycler_view;
+    RecyclerView menu_view;
     RecyclerView buy_recycler_view;
-    RecyclerView news_recycler;
+    RecyclerView news_recycler_view;
 
     ImageFactory factory;
 
@@ -81,11 +93,21 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
-
+        views = new ArrayDeque<Integer>();
 
         Typeface mFont = Typeface.createFromAsset(getAssets(), "fonts/calibril.ttf");
         ViewGroup root = (ViewGroup) findViewById(R.id.drawer_layout);
         setFont(root, mFont);
+
+        FontRequest fontRequest = new FontRequest(
+                "com.example.fontprovider",
+                "com.example",
+                "emoji compat Font Query", R.array.com_google_android_gms_fonts_certs);
+        EmojiCompat.Config config = new FontRequestEmojiCompatConfig(this, fontRequest)
+                .setReplaceAll(true)
+                .setEmojiSpanIndicatorEnabled(false)
+                .setEmojiSpanIndicatorColor(Color.GREEN);
+        EmojiCompat.init(config);
 
 
         ArrayList<com.example.bigchirfufa.MenuItem> animalNames = new ArrayList<com.example.bigchirfufa.MenuItem>();
@@ -119,25 +141,28 @@ public class MainActivity extends AppCompatActivity
         user.ettage.setText(settings.getString("ettage", "").toString());
 
 
-        menu_recycler_view = findViewById(R.id.menuRcV);
-        news_recycler = findViewById(R.id.news_recycler);
-        menu_recycler_view.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MainMenuRecyclerAdapter(this, animalNames);
-        adapter.setClickListener(this);
-        menu_recycler_view.setAdapter(adapter);
-        current_adapter = 0;
-
-        factory = new ImageFactory(findViewById(R.id.drawer_layout), this);
-
-
+        main_menu_recycler_view = findViewById(R.id.menuRcV);
+        menu_view = findViewById(R.id.menu_dishesRcV);
         buy_recycler_view = findViewById(R.id.recycler_buy_id);
+        news_recycler_view = findViewById(R.id.news_recycler);
+        
+        main_menu_recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        menu_view.setLayoutManager(new LinearLayoutManager(this));
         buy_recycler_view.setLayoutManager(new LinearLayoutManager(this));
-        recycler_buy_adapter = new RecyclerBuyAdapter(findViewById(R.id.drawer_layout), factory);
+        news_recycler_view.setLayoutManager(new LinearLayoutManager(this));
+
+        main_menu_adapter = new MainMenuRecyclerAdapter(this, animalNames);
+        recycler_buy_adapter = new RecyclerBuyAdapter(findViewById(R.id.drawer_layout));
+        menu_adapter = new MenuAdapter();
+
+        main_menu_adapter.setClickListener(this);
         recycler_buy_adapter.setClickListener(this);
+        
+        main_menu_recycler_view.setAdapter(main_menu_adapter);
+        menu_view.setAdapter(menu_adapter);
+        buy_recycler_view.setAdapter(recycler_buy_adapter);
 
-        menu_recycler_adapter = new MenuRecyclerAdapter(recycler_buy_adapter, factory, this);
-
-
+   
 
         findViewById(R.id.button_buy).setOnClickListener(this);
 
@@ -157,10 +182,11 @@ public class MainActivity extends AppCompatActivity
         recycler_bar_image.setOnClickListener(this);
 
         findViewById(R.id.profile).setOnClickListener(this);
-        changeView(R.id.menu);
+
         String api_url = "https://api.vk.com/method/wall.get?owner_id=-106468312&v=5.52&access_token=a1b7b189a1b7b189a1b7b189c0a1d30d21aa1b7a1b7b189faaaf5bdd028cdee78829ab4";
         DownloadNews news = new DownloadNews();
         news.execute(api_url);
+        nextView(R.id.menu);
     }
 
     public void parse_news(String html)
@@ -188,10 +214,10 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        news_recycler.setLayoutManager(new LinearLayoutManager(this));
+
         news_adapter = new NewsAdapter(this, news);
-        news_recycler.setAdapter(news_adapter);
-        changeView(R.id.news);
+        news_recycler_view.setAdapter(news_adapter);
+        //nextView(R.id.news);
 
     }
 
@@ -239,7 +265,7 @@ public class MainActivity extends AppCompatActivity
                 });
         txt_view.setText(dish.text);
         titledish.setText(dish.title);
-        changeView(R.id.dish_layout);
+        nextView(R.id.dish_layout);
     }
 
     public void stopAnimation(Boolean stop)
@@ -249,10 +275,14 @@ public class MainActivity extends AppCompatActivity
         {
             throw new NullPointerException("Animation view is null!");
         }
-        if (stop)
+        if (stop) {
             view.setVisibility(View.GONE);
-        else
+        }
+        else {
             view.setVisibility(View.VISIBLE);
+
+        }
+
     }
 
 
@@ -262,7 +292,7 @@ public class MainActivity extends AppCompatActivity
         int id = view.getId();
         if (id == R.id.recycler_start_buy)
         {
-            changeView(R.id.menu);
+            nextView(R.id.menu);
             return;
         }
         if (id == R.id.recycler_bar_image)
@@ -270,14 +300,12 @@ public class MainActivity extends AppCompatActivity
             buy_recycler_view.getRecycledViewPool().clear();
             if (recycler_buy_adapter.mData == null || recycler_buy_adapter.mData.isEmpty())
             {
-                changeView(R.id.recycler_is_empty);
+                nextView(R.id.recycler_is_empty);
             }
             else {
-                //recycler_buy_adapter.update_dataset(menu_recycler_adapter.mDataBuy);
-                menu_recycler_adapter.mDataBuy.clear();
+                menu_adapter.mDataBuy.clear();
                 buy_recycler_view.setAdapter(recycler_buy_adapter);
-                current_adapter = 2;
-                changeView(R.id.recycler_buy);
+                nextView(R.id.recycler_buy);
             }
             return;
         }
@@ -285,7 +313,7 @@ public class MainActivity extends AppCompatActivity
         {
             if (user.isEmpty())
             {
-                changeView(R.id.profile);
+                nextView(R.id.profile);
                 Toast.makeText(this, "Пожалуйста, заполните личные данные", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -315,7 +343,7 @@ public class MainActivity extends AppCompatActivity
             body += " Подъезд: " + user.padik.getText().toString() + '\n' + " Этаж: " + user.ettage.getText().toString() + '\n';
             new MailSenderAsynс().execute(body);
             recycler_buy_adapter.mData.clear();
-            changeView(R.id.recycler_is_empty);
+            nextView(R.id.recycler_is_empty);
         }
     }
 
@@ -346,22 +374,54 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public void onItemRecyclerClick(View view, int pos)
     {
         //
     }
-
-    public void changeView(Integer view_id)
+    
+    public void backView()
     {
-        if (active_view == null)
-        {
-            active_view = findViewById(R.id.menu);
-        }
+        if (views.isEmpty() || views.size() == 1) return;
+        findViewById(views.pollFirst()).setVisibility(View.GONE);
+        findViewById(views.peekFirst()).setVisibility(View.VISIBLE);
+    }
 
-        active_view.setVisibility(View.GONE);
-        incative_view = active_view;
+    public View getCurrentView()
+    {
+        return findViewById(views.peekFirst());
+    }
+
+    public void nextView(Integer view_id)
+    {
+        if (views.isEmpty())
+        {
+            views.push(view_id);
+            active_view = findViewById(view_id);
+            inactive_view = active_view;
+            active_view.setVisibility(View.VISIBLE);
+            return;
+        }
+        if (view_id == R.id.menu_layout)
+        {
+            if (views.peekFirst() == R.id.recycler_buy)
+            {
+                view_id = R.id.menu;
+            }
+        }
+        if (view_id == R.id.recycler_buy)
+        {
+            if (recycler_buy_adapter.mData.isEmpty())
+                view_id = R.id.recycler_is_empty;
+        }
+        for (Integer id: views)
+        {
+            findViewById(id).setVisibility(View.GONE);
+        }
+        if (!view_id.equals(views.peekFirst()))
+        {
+            views.addFirst(view_id);
+        }
         active_view = findViewById(view_id);
         active_view.setVisibility(View.VISIBLE);
     }
@@ -371,43 +431,39 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        stopAnimation(true);
-        if (id == R.id.nav_mail) {
-            changeView(R.id.feedback);
-        } else if (id == R.id.nav_profile)
+        switch (id)
         {
-            changeView(R.id.profile);
-
-        } else if (id == R.id.nav_menufood)
-        {
-            menu_recycler_view.setAdapter(adapter);
-            changeView(R.id.menu);
-
-        } else if (id == R.id.nav_app)
-        {
-            changeView(R.id.about_app);
-        } else if (id == R.id.nav_car)
-        {
-            changeView(R.id.car);
-
-        } else if (id == R.id.nav_news) {
-            changeView(R.id.news);
+            case R.id.nav_mail:
+            {
+                nextView(R.id.feedback);
+                break;
+            }
+            case R.id.nav_profile:
+            {
+                nextView(R.id.profile);
+                break;
+            }
+            case R.id.nav_menufood:
+            {
+                nextView(R.id.menu);
+                break;
+            }
+            case R.id.nav_app:
+            {
+                nextView(R.id.about_app);
+                break;
+            }
+            case R.id.nav_car:
+            {
+                nextView(R.id.car);
+                break;
+            }
+            case R.id.nav_news:
+            {
+                nextView(R.id.news);
+                break;
+            }
         }
-//        } else if (id == R.id.nav_recycler_buy)
-//        {
-//            buy_recycler_view.getRecycledViewPool().clear();
-//            if ((menu_recycler_adapter.mDataBuy == null) || (menu_recycler_adapter.mDataBuy.size() == 0))
-//            {
-//                changeView(R.id.recycler_is_empty);
-//            }
-//            else {
-//                //recycler_buy_adapter.update_dataset(menu_recycler_adapter.mDataBuy);
-//                menu_recycler_adapter.mDataBuy.clear();
-//                buy_recycler_view.setAdapter(recycler_buy_adapter);
-//                current_adapter = 2;
-//                changeView(R.id.recycler_buy);
-//            }
-//        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -423,47 +479,23 @@ public class MainActivity extends AppCompatActivity
 
     private void openQuitDialog() {
         onBackPressed();
-        if (active_view.getId() == R.id.recycler_is_empty)
-        {
-            changeView(R.id.menu);
-            recycler_buy_adapter.mData.clear();
-            //recycler_buy_adapter.update_dataset(new ArrayList<Dish>());
-            return;
-        }
-        if (active_view.getId() == R.id.menu)
-        {
-            if (current_adapter == 1)
-            {
-                menu_recycler_view.setAdapter(adapter);
-                current_adapter = 0;
-                changeView(R.id.menu);
-                stopAnimation(true);
-                return;
-            }
-            if (current_adapter == 0)
-                finish();
-            stopAnimation(true);
-        }
-
-        changeView(incative_view.getId());
-
+        backView();
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        if (menu_recycler_adapter.mDataset != null && !menu_recycler_adapter.mDataset.isEmpty())
-        {
-            stopAnimation(true);
-        }
-        else
-        {
-            stopAnimation(false);
-        }
-        menu_recycler_view.getRecycledViewPool().clear();
-        menu_recycler_adapter.update_menu(position);
-        menu_recycler_view.setAdapter(menu_recycler_adapter);
-        current_adapter = 1;
-        changeView(R.id.menu);
+//        if (menu_adapter.mDataset != null && !menu_adapter.mDataset.isEmpty())
+//        {
+//
+//        }
+//        else
+//        {
+//            return;
+//        }
+        menu_adapter.update_menu(position);
+        menu_view.setAdapter(menu_adapter);
+        nextView(R.id.main_menu);
+
         Typeface mFont = Typeface.createFromAsset(MainActivity.getAppContext().getAssets(), "fonts/calibril.ttf");
         ViewGroup root = (ViewGroup) MainActivity.getAppContext().findViewById(R.id.menu);
         MainActivity.getAppContext().setFont(root, mFont);

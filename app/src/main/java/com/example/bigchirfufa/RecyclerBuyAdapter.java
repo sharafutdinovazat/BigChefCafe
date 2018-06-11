@@ -23,15 +23,11 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
     int summa;
     View view_root;
 
-    private ImageFactory factory;
-
-
     // data is passed into the constructor
-    RecyclerBuyAdapter(View root, ImageFactory factory) {
+    RecyclerBuyAdapter(View root) {
         this_context = this;
         view_root = root;
 
-        this.factory = factory;
     }
 
     // inflates the row layout from xml when needed
@@ -189,8 +185,8 @@ public class RecyclerBuyAdapter extends RecyclerView.Adapter<RecyclerBuyAdapter.
             }
             if (mData.isEmpty())
             {
-                MainActivity.getAppContext().menu_recycler_adapter.mDataBuy.clear();
-                MainActivity.getAppContext().changeView(R.id.recycler_is_empty);
+                MainActivity.getAppContext().menu_adapter.mDataBuy.clear();
+                MainActivity.getAppContext().nextView(R.id.recycler_is_empty);
             }
 
             this_context.notifyDataSetChanged();
