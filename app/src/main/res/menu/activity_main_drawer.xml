@@ -23,7 +23,7 @@
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_cafe"
-            android:title="О Кафе" />
+            android:title="О кафе" />
 
         <item
             android:id="@+id/nav_mail"

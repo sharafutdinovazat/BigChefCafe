@@ -33,10 +33,12 @@ class MailSenderAsynс extends AsyncTask<String, Void, Void>
                         "bigchefufa@mail.ru",
                         "gagagii@mail.ru");
             }
-            sender.sendMail("Новый Заказ!",
-                    params[0],
-                    "bigchefufa@mail.ru",
-                    "gagagii@mail.ru");
+            else {
+                sender.sendMail("Новый Заказ!",
+                        params[0],
+                        "bigchefufa@mail.ru",
+                        "gagagii@mail.ru");
+            }
         } catch (Exception e) {
             Log.w("SendMail", e.getMessage(), e);
         }

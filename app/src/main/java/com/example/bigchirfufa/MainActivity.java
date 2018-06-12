@@ -365,8 +365,11 @@ public class MainActivity extends AppCompatActivity
             body += " Номер телефона: " + user.phone_number.getText().toString() + '\n' + " Улица: " + user.adress.getText().toString() + '\n';
             body += " Номер дома: " + user.dom.getText().toString() + '\n' + " Квартира: " + user.kvartira.getText().toString() + '\n';
             body += " Подъезд: " + user.padik.getText().toString() + '\n' + " Этаж: " + user.ettage.getText().toString() + '\n';
+            recycler_buy_adapter.summ_update();
+            body += " Сумма: " + recycler_buy_adapter.summa;
             new MailSenderAsynс().execute(body);
             recycler_buy_adapter.mData.clear();
+            recycler_buy_adapter.summ_update();
             nextView(R.id.recycler_is_empty);
         }
     }
