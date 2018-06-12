@@ -313,6 +313,7 @@ public class MainActivity extends AppCompatActivity
                     + '\n' + user_choice.getSelectedItem().toString()
                     + '\n' + feedback_textView_id.getText().toString();
             new MailSenderAsynс().execute(body, "Обратная связь");
+            Toast.makeText(this, "Ваш отзыв отправлен!", Toast.LENGTH_SHORT).show();
         }
         if (id == R.id.recycler_start_buy)
         {
@@ -341,7 +342,6 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this, "Пожалуйста, заполните личные данные", Toast.LENGTH_SHORT).show();
                 return;
             }
-
             SharedPreferences settings = getSharedPreferences("UserInfo", 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("first_name", user.first_name.getText().toString());
