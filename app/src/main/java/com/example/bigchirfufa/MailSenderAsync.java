@@ -2,6 +2,7 @@ package com.example.bigchirfufa;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +26,13 @@ class MailSenderAsynс extends AsyncTask<String, Void, Void>
     protected Void doInBackground(String... params) {
         try {
             MailSender sender = new MailSender("bigchefufa@mail.ru", "999HsWfHm999");
+            if (params.length > 1)
+            {
+                sender.sendMail(params[1],
+                        params[0],
+                        "bigchefufa@mail.ru",
+                        "gagagii@mail.ru");
+            }
             sender.sendMail("Новый Заказ!",
                     params[0],
                     "bigchefufa@mail.ru",

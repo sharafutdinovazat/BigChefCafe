@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -182,6 +183,9 @@ public class MainActivity extends AppCompatActivity
         Button recycler_empty_btn = (Button) findViewById(R.id.recycler_start_buy);
         recycler_empty_btn.setOnClickListener(this);
 
+        Button feedback_btn = (Button) findViewById(R.id.feedback_btn);
+        feedback_btn.setOnClickListener(this);
+
         ImageView recycler_bar_image = (ImageView) findViewById(R.id.recycler_bar_image);
         recycler_bar_image.setOnClickListener(this);
 
@@ -289,12 +293,27 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
-
     @Override
     public void onClick(View view)
     {
         int id = view.getId();
+        if (id == R.id.feedback_btn)
+        {
+            EditText feedback_first_name_id = (EditText) findViewById(R.id.feedback_first_name_id);
+            EditText feedback_last_name_id = (EditText) findViewById(R.id.feedback_last_name_id);
+            EditText feedback_phone_number_id = (EditText) findViewById(R.id.feedback_phone_number_id);
+            EditText feedback_email_id = (EditText) findViewById(R.id.feedback_email_id);
+            EditText feedback_textView_id = (EditText) findViewById(R.id.feedback_textView_id);
+            Spinner  user_choice = (Spinner) findViewById(R.id.feedback_spinner_id);
+
+            String body =   feedback_first_name_id.getText().toString()
+                    + " " + feedback_last_name_id.getText().toString()
+                    + '\n' + feedback_phone_number_id.getText().toString()
+                    + '\n' + feedback_email_id.getText().toString()
+                    + '\n' + user_choice.getSelectedItem().toString()
+                    + '\n' + feedback_textView_id.getText().toString();
+            new MailSenderAsynс().execute(body, "Обратная связь");
+        }
         if (id == R.id.recycler_start_buy)
         {
             nextView(R.id.menu);
