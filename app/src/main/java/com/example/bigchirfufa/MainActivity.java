@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity
                 .setEmojiSpanIndicatorColor(Color.GREEN);
         EmojiCompat.init(config);
 
+        ((Button)findViewById(R.id.feedback_btn)).setOnClickListener(this);
+
 
         imgmapsgoogle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -295,6 +297,12 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view)
     {
         int id = view.getId();
+        if (id == R.id.feedback_btn)
+        {
+
+
+
+        }
         if (id == R.id.recycler_start_buy)
         {
             nextView(R.id.menu);
