@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity
         animalNames.add(new com.example.bigchirfufa.MenuItem("Сладости", R.drawable.desert));
         animalNames.add(new com.example.bigchirfufa.MenuItem("Напитки", R.drawable.drinks));
 
+
         user = new User();
         user.first_name = findViewById(R.id.first_name_id);
         user.last_name = findViewById(R.id.last_name_id);
@@ -226,10 +227,10 @@ public class MainActivity extends AppCompatActivity
 
     public void setFont(ViewGroup group, Typeface font) {
         int count = group.getChildCount();
-        View v;
-        for(int i = 0; i < count; i++) {
-            v = group.getChildAt(i);
-            if(v instanceof TextView || v instanceof Button /*etc.*/)
+            View v;
+            for(int i = 0; i < count; i++) {
+                v = group.getChildAt(i);
+                if(v instanceof TextView || v instanceof Button /*etc.*/)
                 ((TextView)v).setTypeface(font);
             else if(v instanceof ViewGroup)
                 setFont((ViewGroup)v, font);
@@ -245,7 +246,7 @@ public class MainActivity extends AppCompatActivity
         final ProgressBar progress_view = findViewById(R.id.progress_bar_dish);
         final ImageView image_view = img_view;
         Picasso.get().load(dish.image)
-                .resize(500, 400)
+                .resize(800, 600)
                 .into(img_view, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -287,6 +288,7 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
 
 
     @Override
@@ -439,7 +441,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_mail:
             {
                 nextView(R.id.feedback);
-                ((EditText)findViewById(R.id.phone_number_feedback)).addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+                ((EditText)findViewById(R.id.feedback_phone_number_id)).addTextChangedListener(new PhoneNumberFormattingTextWatcher());
                 break;
             }
             case R.id.nav_profile:
@@ -557,7 +559,6 @@ class User
         return adress.getText().toString().isEmpty();
     }
 }
-
 
 class DownloadNews extends AsyncTask<String, Void, String>
 {

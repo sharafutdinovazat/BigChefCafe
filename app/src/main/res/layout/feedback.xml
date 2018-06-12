@@ -55,7 +55,7 @@
                     android:textColor="@color/main_text_color" />
 
                 <EditText
-                    android:id="@+id/first_name_id"
+                    android:id="@+id/feedback_first_name_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -71,7 +71,7 @@
                     android:textColor="@color/main_text_color" />
 
                 <EditText
-                    android:id="@+id/last_name_id"
+                    android:id="@+id/feedback_last_name_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -87,7 +87,7 @@
                     android:textColor="@color/main_text_color" />
 
                 <EditText
-                    android:id="@+id/phone_number_feedback"
+                    android:id="@+id/feedback_phone_number_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -103,7 +103,7 @@
                     android:textColor="@color/main_text_color" />
 
                 <EditText
-                    android:id="@+id/postal_email_id"
+                    android:id="@+id/feedback_email_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -120,9 +120,10 @@
                     android:textColor="@color/main_text_color" />
 
                 <Spinner
-                    android:id="@+id/spinner"
+                    android:id="@+id/feedback_spinner_id"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:entries="@array/feedback_spinner_id" />
 
                 <TextView
                     android:id="@+id/textView13"
@@ -134,7 +135,7 @@
                     android:textColor="@color/main_text_color" />
 
                 <EditText
-                    android:id="@+id/textView2"
+                    android:id="@+id/feedback_textView_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"

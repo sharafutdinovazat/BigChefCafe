@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/ramki"
         android:orientation="horizontal">
 
         <ImageView
@@ -16,14 +17,15 @@
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:layout_weight="1"
+            android:paddingLeft="8dp"
             android:visibility="gone" />
+
         <ProgressBar
             android:id="@+id/progress_bar_dish"
             android:layout_width="243dp"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
