@@ -1,15 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/app_bar_main"
-    tools:layout_editor_absoluteY="137dp"
-    android:orientation="vertical">
+    android:layout_marginTop="50dp"
+    android:orientation="vertical"
+    tools:showIn="@layout/app_bar_main">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/about_text"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
@@ -37,8 +37,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="0dp"
-                android:text="@string/about_text2"
                 android:autoLink="phone"
+                android:text="@string/about_text2"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 

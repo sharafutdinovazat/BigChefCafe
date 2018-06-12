@@ -19,7 +19,8 @@
             android:id="@+id/layout_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -144,7 +145,7 @@
                     android:minHeight="60dp" />
 
                 <Button
-                    android:id="@+id/recycler_start_buy"
+                    android:id="@+id/feedback_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
